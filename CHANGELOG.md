@@ -10,7 +10,25 @@ framed around the project's two architecture axes (see
 The format is adapted from [Keep a Changelog](https://keepachangelog.com/); versions follow
 `vMAJOR.MINOR.PATCH`. (The first tag `v0.1` predates that convention and is kept as-is.)
 
-## [Unreleased]
+## [0.1.0-beta.1] - 2026-10-11
+
+**Public version line reset to a Worldwide Council beta.** The project's public version is reset to
+`v0.1.0-beta.1`, opening a new Worldwide Council public beta line. The previous Religion Council /
+Worldview Council GitHub releases and tags (`v0.1` … `v0.13.1`) are retired from GitHub. **Commit
+history and the historical changelog provenance below remain intact** — older code, commits and
+changelog entries are not erased; only the published GitHub release/tag set is reset. This is a
+**prerelease**, not a stable release.
+
+### Release / publication
+- **Repository renamed** `F-e-u-e-r/religion-council` → `F-e-u-e-r/worldwide-council` (GitHub keeps
+  redirects from the old slug). Current public slug references in `README.md`, `INSTALL.md`,
+  `.claude-plugin/plugin.json` and `.github/ISSUE_TEMPLATE/config.yml` are migrated to the new slug;
+  the versioned protocol IDs, the `religion-8.json` fixture filename, the `.religion-council` /
+  `RELIGION_COUNCIL_PROJECT_DIR` compatibility fallbacks, and all historical records keep the old name.
+- **Public `VERSION` → `v0.1.0-beta.1`** (plugin and controller machine version `0.1.0-beta.1`). The
+  16 version-bound retrieval-v1 benchmark artifacts were regenerated so their `corpus_version`
+  metadata tracks the new `VERSION`; queries, judgments, thresholds, the retrieval algorithm and all
+  scores are unchanged (version-metadata-only regeneration, verified by diff).
 
 ### Changed
 - **Machine-identifier migration to Worldwide Council (brand-identity convergence; no release).**
