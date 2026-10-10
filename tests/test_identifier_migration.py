@@ -6,7 +6,7 @@ older identifier are intentionally PRESERVED and must keep the old name:
 
   * versioned protocol IDs  — ``religion-council/retrieval/v1``, ``religion-council/claim/v1``
     (and the ``-draft`` variant). Brand migration != protocol version migration.
-  * the external repo slug  — ``github.com/F-e-u-e-r/religion-council`` (external rename pending).
+  * the external repo slug  — ``github.com/F-e-u-e-r/religion-council`` (repo is now ``F-e-u-e-r/worldwide-council``; the old slug persists in history and GitHub's redirect).
   * natural-language safety triggers — ``"do not start the religion council"`` in the routing policies.
   * historical records       — CHANGELOG history, ADRs, the frozen product review, ``docs/release/``.
 

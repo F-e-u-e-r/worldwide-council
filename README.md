@@ -13,7 +13,7 @@
 
 **English** · [繁體中文](#繁體中文)
 
-_Originally “Religion Council”; renamed “Worldview Council” as it broadened beyond religion, and now **Worldwide Council** (canonical since October 2026). The repo, skill, and MCP identifiers stay `religion-council` for compatibility._
+_Originally “Religion Council”; renamed “Worldview Council” as it broadened beyond religion, and now **Worldwide Council** (canonical since October 2026). The repo, plugin, marketplace, skill, MCP, and agent identifiers are all `worldwide-council`; the legacy `religion-council` name is kept only on explicitly exempt surfaces — the versioned protocol IDs (e.g. `religion-council/claim/v1`), the `.religion-council` / `RELIGION_COUNCIL_PROJECT_DIR` compatibility fallbacks, the `religion-8.json` fixture, and historical records._
 
 **Who it's for.** Developers running Claude Code, Codex, or any MCP-capable agent, plus educators and inter-faith readers who want a sourced, multi-tradition debate rather than a single blended voice.
 
@@ -421,7 +421,7 @@ renderings. Attribute to "Worldwide Council contributors."
 
 > 以原典為據、由中立主持人調度的「跨傳統哲學議會」——可直接掛載到 AI coding agent 的 skill。
 
-_原稱「Religion Council」，後更名為「Worldview Council」，現正式名稱為 **Worldwide Council**（2026 年 10 月起）；為相容，repo / skill / MCP 識別碼仍維持 `religion-council`。_
+_原稱「Religion Council」，後更名為「Worldview Council」，現正式名稱為 **Worldwide Council**（2026 年 10 月起）；repo、plugin、marketplace、skill、MCP、agent 識別碼現均為 `worldwide-council`，legacy `religion-council` 僅保留於明確豁免面——versioned protocol IDs（如 `religion-council/claim/v1`）、`.religion-council` / `RELIGION_COUNCIL_PROJECT_DIR` 相容 fallback、`religion-8.json` fixture 與歷史記錄。_
 
 **適合誰。** 使用 Claude Code、Codex 或任何支援 MCP 之 agent 的開發者,以及想要「有原典依據的多傳統辯論」而非單一混合口吻的教育者與跨宗教讀者。
 
