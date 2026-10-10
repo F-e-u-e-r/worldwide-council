@@ -1,0 +1,515 @@
+{
+  "_note": "A1 curated presentation/provenance/rights sidecar (optional, additive). retrieve.py merges these per-record fields onto matching records by (tradition, work, locator). representation_kind / rendering_mode are curator-declared, carried-not-trusted metadata (ADR 0003 §2): downstream still span-verifies (B2) and presents renderings with a marker (B3/renderer). Absent/unparseable/structurally-invalid -> no curation; a wrong-typed value is dropped at merge (enum-membership is checked in the test suite). rights/provenance carry the per-snippet rights review the corpus requires; the public-domain basis is asserted by age/publication date and was NOT independently audited per edition/jurisdiction (review: not-independently-audited) — confirm before redistribution. Published translations are limited to public-domain editions (e.g. 和合本 1919); the Qur'an, Pali and Sanskrit excerpts are this project's own generated meaning-renderings (generated-rendering), marked as such and never presented as published quotations (replace-first rights policy, 2026-09-28: no third-party translation believed to be in copyright is bundled).",
+  "islam": [
+    {
+      "work": "古蘭經",
+      "locator": "51:56",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "corpus_family": "quran",
+      "provenance": {
+        "source_language": "ar",
+        "basis": "public-domain-original (Qur'anic Arabic; the canon is the Arabic text)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of the Arabic (Qur'an 51:56); not a published translation — it replaced a 20th-century published excerpt whose copyright status was unconfirmed. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against the Arabic before relying on verbatim fidelity."
+      },
+      "rights": "Underlying Arabic original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "古蘭經",
+      "locator": "112:1-4(忠誠章)",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "corpus_family": "quran",
+      "provenance": {
+        "source_language": "ar",
+        "basis": "public-domain-original (Qur'anic Arabic; the canon is the Arabic text)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of the Arabic (Qur'an 112:1-4(忠誠章)); not a published translation — it replaced a 20th-century published excerpt whose copyright status was unconfirmed. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against the Arabic before relying on verbatim fidelity."
+      },
+      "rights": "Underlying Arabic original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "古蘭經",
+      "locator": "2:156",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "corpus_family": "quran",
+      "provenance": {
+        "source_language": "ar",
+        "basis": "public-domain-original (Qur'anic Arabic; the canon is the Arabic text)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of the Arabic (Qur'an 2:156); not a published translation — it replaced a 20th-century published excerpt whose copyright status was unconfirmed. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against the Arabic before relying on verbatim fidelity."
+      },
+      "rights": "Underlying Arabic original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "古蘭經",
+      "locator": "1:1(開端章)",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "corpus_family": "quran",
+      "provenance": {
+        "source_language": "ar",
+        "basis": "public-domain-original (Qur'anic Arabic; the canon is the Arabic text)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of the Arabic (Qur'an 1:1(開端章)); not a published translation — it replaced a 20th-century published excerpt whose copyright status was unconfirmed. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against the Arabic before relying on verbatim fidelity."
+      },
+      "rights": "Underlying Arabic original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "古蘭經",
+      "locator": "2:256",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "corpus_family": "quran",
+      "provenance": {
+        "source_language": "ar",
+        "basis": "public-domain-original (Qur'anic Arabic; the canon is the Arabic text)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of the Arabic (Qur'an 2:256); not a published translation — it replaced a 20th-century published excerpt whose copyright status was unconfirmed. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against the Arabic before relying on verbatim fidelity."
+      },
+      "rights": "Underlying Arabic original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "_note": "Cross-locus thematic paraphrase (信道而行善者必得回報之意), cited at 多處 (2:25、103 章) — not a verbatim excerpt and not bound to a single locus. interpretation_only routes it to Surface B; it is never admissible as a《古蘭經》[Text] quotation (ADR 0004). No representation_kind/rights: a thematic cue is not a quotable excerpt, so no report-counted metadata changes.",
+      "work": "古蘭經",
+      "locator": "多處(如 2:25、103 章)",
+      "interpretation_only": true
+    },
+    {
+      "work": "布哈里聖訓實錄",
+      "locator": "開卷傳述(附傳述鏈)",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "provenance": {
+        "source_language": "ar",
+        "basis": "public-domain-original (classical Arabic ḥadīth; Ṣaḥīḥ al-Bukhārī, opening narration innamā l-aʿmālu bi-n-niyyāt)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of the Arabic; not a published translation. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). The isnād is not reproduced here; confirm against the Arabic."
+      },
+      "rights": "Underlying Arabic original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    }
+  ],
+  "hinduism": [
+    {
+      "work": "廣林奧義書",
+      "locator": "1.4.10",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "sruti",
+      "corpus_family": "upanishads",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of a public-domain Sanskrit original (Bṛhadāraṇyaka Upaniṣad 1.4.10, the mahāvākya 'aham brahmāsmi'); not a published edition. Confirm against a scholarly edition before relying on verbatim fidelity."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    },
+    {
+      "work": "薄伽梵歌",
+      "locator": "2:48",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "smriti",
+      "corpus_family": "bhagavad_gita",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of a public-domain Sanskrit original (Bhagavad Gītā 2.48, 'yoga-sthaḥ kuru karmāṇi'); not a published edition. Confirm against a scholarly edition."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    },
+    {
+      "work": "薄伽梵歌",
+      "locator": "4:7",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "smriti",
+      "corpus_family": "bhagavad_gita",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of a public-domain Sanskrit original (Bhagavad Gītā 4.7, 'yadā yadā hi dharmasya'); not a published edition. Confirm against a scholarly edition."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    },
+    {
+      "work": "薄伽梵歌",
+      "locator": "2:47",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "smriti",
+      "corpus_family": "bhagavad_gita",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of Bhagavad Gītā 2.47 (karmaṇy evādhikāras te mā phaleṣu kadācana); not a published edition. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against a scholarly edition."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    },
+    {
+      "work": "薄伽梵歌",
+      "locator": "2:20",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "smriti",
+      "corpus_family": "bhagavad_gita",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of Bhagavad Gītā 2.20 (na jāyate mriyate vā kadācin … na hanyate hanyamāne śarīre); not a published edition. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against a scholarly edition."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    },
+    {
+      "work": "歌者奧義書",
+      "locator": "6.8.7",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "sruti",
+      "corpus_family": "upanishads",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of Chāndogya Upaniṣad 6.8.7, the mahāvākya 'tat tvam asi'; a three-word formula, not a published edition. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against a scholarly edition."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    },
+    {
+      "work": "廣林奧義書",
+      "locator": "1.3.28",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "sruti",
+      "corpus_family": "upanishads",
+      "provenance": {
+        "source_language": "sa",
+        "basis": "public-domain-original (ancient Sanskrit)",
+        "review": "not-independently-audited",
+        "note": "Chinese meaning-rendering of Bṛhadāraṇyaka Upaniṣad 1.3.28 (asato mā sad gamaya …); not a published edition. Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). Confirm against a scholarly edition."
+      },
+      "rights": "Underlying Sanskrit original is public domain by age; the Chinese is a generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-edition/jurisdiction status not independently audited; confirm against a scholarly edition before redistribution."
+    }
+  ],
+  "christianity": [
+    {
+      "work": "約翰福音",
+      "locator": "1:1",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "grc",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    },
+    {
+      "work": "希伯來書",
+      "locator": "11:1",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "grc",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    },
+    {
+      "work": "創世記",
+      "locator": "1:1",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "hbo",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    },
+    {
+      "work": "傳道書",
+      "locator": "1:2",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "hbo",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    },
+    {
+      "work": "約翰福音",
+      "locator": "3:16",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "grc",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    },
+    {
+      "work": "馬太福音",
+      "locator": "22:37-39",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "grc",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    },
+    {
+      "work": "彌迦書",
+      "locator": "6:8",
+      "representation_kind": "published-translation",
+      "rendering_mode": "direct-translation",
+      "canon_scope": "protestant",
+      "corpus_family": "bible",
+      "provenance": {
+        "translator": "和合本 (Chinese Union Version)",
+        "year": "1919",
+        "source_language": "hbo",
+        "basis": "public-domain-by-publication-date",
+        "review": "not-independently-audited"
+      },
+      "rights": "《和合本》(Chinese Union Version, 1919); understood to be public domain by publication date in most jurisdictions. Per-jurisdiction status not independently audited; confirm before redistribution (see DISCLAIMER.md)."
+    }
+  ],
+  "buddhism": [
+    {
+      "work": "法句經",
+      "locator": "1(南傳)",
+      "representation_kind": "generated-rendering",
+      "rendering_mode": "meaning-rendering",
+      "canon_scope": "theravada",
+      "corpus_family": "pali_canon",
+      "provenance": {
+        "source_language": "pi",
+        "basis": "public-domain-original (Pali canon)",
+        "review": "not-independently-audited",
+        "note": "Project-generated Chinese meaning-rendering of Pali Dhammapada 1 (manopubbaṅgamā dhammā, manoseṭṭhā manomayā); not a published translation — it replaced a 1950s published translation whose copyright status was unconfirmed (replace-first rights policy, 2026-09-28). Method: rendered by the project directly from the source text, clause by clause; no Chinese translation was consulted or reproduced (replace-first rights policy, 2026-09-28). The classical Chinese 法句經 (T210) parallel is a candidate future original-text record."
+      },
+      "rights": "Underlying Pali original is public domain by age; the Chinese is this project's own generated meaning-rendering (not a published edition) and must not be presented as a published quotation. Per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "雜阿含經",
+      "locator": "(緣起法)",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern Chinese canon)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern Chinese Buddhist-canon text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "法句經",
+      "locator": "183",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern Chinese canon)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern Chinese Buddhist-canon text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    }
+  ],
+  "taoism": [
+    {
+      "work": "道德經",
+      "locator": "1",
+      "version": "通行本",
+      "representation_kind": "original-text",
+      "witness_kind": "received",
+      "textual_witness": "wang_bi",
+      "commentarial_lineage": "wang_bi",
+      "corpus_family": "daodejing",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited",
+        "note": "Received text (通行本), Wang Bi 王弼 recension/commentary line; an excavated 馬王堆帛書 witness of this text exists and differs (e.g. 恆 vs 常 and 也 particles — ch.1 「道可道也,非恆道也」). Not edition-backed."
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "道德經",
+      "locator": "8",
+      "version": "通行本",
+      "representation_kind": "original-text",
+      "witness_kind": "received",
+      "textual_witness": "wang_bi",
+      "commentarial_lineage": "wang_bi",
+      "corpus_family": "daodejing",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited",
+        "note": "Received text (通行本), Wang Bi 王弼 recension/commentary line; an excavated 馬王堆帛書 witness of this text exists and differs (e.g. 恆 vs 常 and 也 particles). Not edition-backed."
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "道德經",
+      "locator": "25",
+      "version": "通行本",
+      "representation_kind": "original-text",
+      "witness_kind": "received",
+      "textual_witness": "wang_bi",
+      "commentarial_lineage": "wang_bi",
+      "corpus_family": "daodejing",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited",
+        "note": "Received text (通行本), Wang Bi 王弼 recension/commentary line; an excavated 馬王堆帛書 witness of this text exists and differs (e.g. 恆 vs 常 and 也 particles). Not edition-backed."
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "道德經",
+      "locator": "48",
+      "version": "通行本",
+      "representation_kind": "original-text",
+      "witness_kind": "received",
+      "textual_witness": "wang_bi",
+      "commentarial_lineage": "wang_bi",
+      "corpus_family": "daodejing",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited",
+        "note": "Received text (通行本), Wang Bi 王弼 recension/commentary line; an excavated 馬王堆帛書 witness of this text exists and differs (e.g. 恆 vs 常 and 也 particles). Not edition-backed."
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "道德經",
+      "locator": "58",
+      "version": "通行本",
+      "representation_kind": "original-text",
+      "witness_kind": "received",
+      "textual_witness": "wang_bi",
+      "commentarial_lineage": "wang_bi",
+      "corpus_family": "daodejing",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited",
+        "note": "Received text (通行本), Wang Bi 王弼 recension/commentary line; an excavated 馬王堆帛書 witness of this text exists and differs (e.g. 恆 vs 常 and 也 particles). Not edition-backed."
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    }
+  ],
+  "confucianism": [
+    {
+      "work": "論語",
+      "locator": "為政",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "論語",
+      "locator": "里仁",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    }
+  ],
+  "legalism": [
+    {
+      "work": "韓非子",
+      "locator": "有度",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "韓非子",
+      "locator": "五蠹",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "韓非子",
+      "locator": "難三",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    }
+  ],
+  "mohism": [
+    {
+      "work": "墨子",
+      "locator": "尚賢上",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    },
+    {
+      "work": "墨子",
+      "locator": "非樂上",
+      "provenance": {
+        "source_language": "lzh",
+        "basis": "public-domain-by-age (pre-modern classical Chinese)",
+        "review": "not-independently-audited"
+      },
+      "rights": "Pre-modern classical Chinese text; understood public domain by age. Specific modern edition/typesetting and per-jurisdiction status not independently audited; confirm before redistribution."
+    }
+  ]
+}

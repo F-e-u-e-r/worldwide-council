@@ -14,13 +14,13 @@ import policy_enums  # noqa: E402
 import retrieval_evidence_adapter as adapter  # noqa: E402
 from evidence_snapshot import EvidenceStore, canonical_bytes  # noqa: E402
 
-PORTABLE_DIR = ROOT / "skills" / "religion-council"
-CLAUDE_DIR = ROOT / ".claude" / "skills" / "religion-council"
+PORTABLE_DIR = ROOT / "skills" / "worldwide-council"
+CLAUDE_DIR = ROOT / ".claude" / "skills" / "worldwide-council"
 BASELINE_PER_TRADITION = 7  # the S3 consistent baseline (also the post-enrichment median)
 
 # The exact records S3 added, by (work, locator). Every one must carry a per-snippet
-# provenance + rights-basis note (finding-3 fix). 13 public-domain-basis excerpts + 2 in-copyright
-# Qur'an excerpts (馬堅) + 3 generated Sanskrit renderings = 18.
+# provenance + rights-basis note (finding-3 fix). 13 public-domain-basis excerpts + 2 project-generated
+# Qur'an renderings + 3 generated Sanskrit renderings = 18.
 NEW_RECORDS = {
     "christianity": [("約翰福音", "1:1"), ("希伯來書", "11:1")],
     "islam": [("古蘭經", "1:1(開端章)"), ("古蘭經", "2:256")],
@@ -159,7 +159,7 @@ class CorpusCurationTest(unittest.TestCase):
     def test_adr0008_islam_interpretation_only_thematic_cue(self):
         # The cross-locus《古蘭經》thematic paraphrase (locator 多處 — 信道而行善者必得回報之意) is a
         # thematic CUE, not a verbatim excerpt: it carries interpretation_only=True so the renderer can
-        # never mint it as a Surface-A [Text] quote (ADR 0004). It is NOT a 馬堅 published translation —
+        # never mint it as a Surface-A [Text] quote (ADR 0004). It is NOT a quotable rendering —
         # no representation_kind / textual_witness / canon_scope, and no new evidence record was added.
         index = {(r["work"], r["locator"]): r for r in self.by_tradition["islam"]}
         cue = index[("古蘭經", "多處(如 2:25、103 章)")]
@@ -171,10 +171,10 @@ class CorpusCurationTest(unittest.TestCase):
         # representation_kind, no rights), so the retrieval reports stay byte-reproducible.
         self.assertNotIn("rights", cue)
         self.assertNotIn("provenance", cue)
-        # The concrete 馬堅 published translations stay quotable — never mislabeled interpretation-only.
+        # The concrete Qur'an renderings stay quotable — never mislabeled interpretation-only.
         for key in (("古蘭經", "51:56"), ("古蘭經", "2:256"), ("古蘭經", "1:1(開端章)")):
             self.assertIsNone(index[key].get("interpretation_only"), key)
-            self.assertEqual(index[key]["representation_kind"], "published-translation", key)
+            self.assertEqual(index[key]["representation_kind"], "generated-rendering", key)
 
     def test_adr0008_hinduism_canon_scope(self):
         # ADR 0008 Phase 1 backfill (Hinduism): conservative canon-scope + corpus-family only, on the existing
@@ -251,9 +251,10 @@ class CorpusCurationTest(unittest.TestCase):
             self.assertEqual(record["provenance"].get("source_language"), "grc", key)
 
     def test_adr0008_islam_corpus_family(self):
-        # ADR 0008 Phase 1 backfill (Islam): the five 馬堅《古蘭經》(Qur'an) records are grouped by
-        # corpus_family=quran — the only field added. The Qur'an stays a meaning-rendering *published
-        # translation*, never a textual "version" (ADR 0008 §7-A). Deliberately NO canon_scope: the
+        # ADR 0008 Phase 1 backfill (Islam): the five《古蘭經》(Qur'an) records are grouped by
+        # corpus_family=quran. Since the replace-first rights remediation (2026-09-28) they are this
+        # project's own generated meaning-renderings of the Arabic — never a published translation in
+        # copyright, never a textual "version" (ADR 0008 §7-A). Deliberately NO canon_scope: the
         # Qur'anic text is agreed across Sunni/Shia; the sectarian split is the ḥadīth layer, deferred.
         # No original-text / textual_witness / edition-backed claim, no new records.
         index = {(r["work"], r["locator"]): r for r in self.by_tradition["islam"]}
@@ -268,17 +269,18 @@ class CorpusCurationTest(unittest.TestCase):
             record = index[key]
             self.assertEqual(record["corpus_family"], "quran", key)
             self.assertIn(record["corpus_family"], corpus_metadata_enums.CORPUS_FAMILIES, key)
-            self.assertEqual(record["representation_kind"], "published-translation", key)
+            self.assertEqual(record["representation_kind"], "generated-rendering", key)
             self.assertEqual(record["rendering_mode"], "meaning-rendering", key)
-            # Honest wording: a meaning-rendering translation, never the original-language text, never a
+            # Honest wording: a generated meaning-rendering, never the original-language text, never a
             # textual "version", never edition-backed; no sectarian canon stamped on the Qur'an text.
             self.assertNotEqual(record["representation_kind"], "original-text", key)
             self.assertNotIn("textual_witness", record, key)
             self.assertNotIn("canon_scope", record, key)
             self.assertNotIn("span_assurance_tier", record, key)
-            self.assertIn("馬堅", record["provenance"].get("translator", ""), key)
+            self.assertEqual(record["provenance"].get("source_language"), "ar", key)
+            self.assertNotIn("translator", record["provenance"], key)  # no third-party translation
         # The remaining《古蘭經》record is the interpretation_only thematic cue (see the test above) —
-        # not a 馬堅 excerpt. This corpus_family pass deliberately leaves it untagged: no corpus_family,
+        # not a quotable rendering. This corpus_family pass deliberately leaves it untagged: no corpus_family,
         # no representation_kind, so it stays free of report-counted metadata.
         untagged = [
             r for r in self.by_tradition["islam"]
@@ -288,6 +290,90 @@ class CorpusCurationTest(unittest.TestCase):
         self.assertIs(untagged[0].get("interpretation_only"), True)
         self.assertNotIn("corpus_family", untagged[0])
         self.assertNotIn("representation_kind", untagged[0])
+
+    # ---- rights policy gates (owner decision 2026-09-28: replace-first, reusable editions only) ----
+    def test_published_translations_are_public_domain_editions_only(self):
+        # Replace-first: a bundled *published* translation must be a public-domain edition, which we
+        # pin conservatively as first published before 1930 (works published through 1930 entered the
+        # US public domain on 2026-01-01; "life + 50/70" jurisdictions are covered for a 1919 edition
+        # whose translators died decades ago — still asserted by date, NOT independently audited per
+        # jurisdiction). Anything newer must be replaced by a public-domain edition or by the
+        # project's own generated-rendering, never bundled under an unresolved rights note.
+        published = [r for r in self.all_records if r.get("representation_kind") == "published-translation"]
+        self.assertTrue(published)  # the 和合本 records keep this branch live
+        for r in published:
+            prov = r["provenance"]
+            self.assertEqual(prov.get("basis"), "public-domain-by-publication-date", (r["work"], r["locator"]))
+            self.assertLess(int(prov["year"]), 1930, (r["work"], r["locator"]))
+
+    def test_no_record_carries_an_unresolved_copyright_note(self):
+        # The pre-remediation sidecar admitted "typically in copyright; confirm licensing" on bundled
+        # excerpts. That state is no longer allowed: a rights note may say "confirm before
+        # redistribution" (per-jurisdiction audit honesty) but never that the excerpt itself is, or is
+        # typically, in copyright — such an excerpt is replaced, not annotated.
+        for r in self.all_records:
+            rights = (r.get("rights") or "").lower()
+            for term in ("in copyright", "copyrighted", "受版權保護", "仍受版權"):
+                self.assertNotIn(term, rights, (r["work"], r["locator"], term))
+            translator = (r.get("provenance") or {}).get("translator", "")
+            self.assertNotIn("馬堅", translator, (r["work"], r["locator"]))
+
+    def test_non_classical_chinese_sources_are_always_curated(self):
+        # The in-copyright excerpts that had to be replaced came in as UNCURATED bullets (no sidecar
+        # entry, so no rights note to check). Close that path: every verbatim record whose source
+        # language is not classical Chinese (traditions whose primary texts are Hebrew/Greek, Arabic,
+        # Sanskrit/Pali) must declare how its Chinese wording arose — a public-domain published
+        # translation or the project's own generated rendering — or route to interpretation only.
+        for tradition in ("christianity", "islam", "hinduism"):
+            for r in self.by_tradition[tradition]:
+                if r.get("interpretation_only") or not r["verbatim"]:
+                    continue
+                self.assertIn(
+                    r.get("representation_kind"),
+                    ("published-translation", "generated-rendering", "original-text"),
+                    (tradition, r["work"], r["locator"]),
+                )
+
+    # Verbatim wordings removed by the 2026-09-28 rights remediation (20th-century translations
+    # believed to be in copyright, or renderings of unverified provenance). None may return to any
+    # reference file in either distribution — a regression guard for known-bad strings, the same
+    # shape as a secret-scanner fixture, not a substitute for the provenance gates above.
+    REMOVED_WORDINGS = (
+        "我創造精靈和人類,只為要他們崇拜我",
+        "你說:他是真主,是獨一的主",
+        "我們確是真主所有的,我們必定只歸依他",
+        "奉至仁至慈的真主之名",
+        "對於宗教,絕無強迫",
+        "是真主的使者和眾先知的封印",
+        "一切行為全憑舉意",
+        "你是伯多祿(磐石),在這磐石上我要建立我的教會",
+        "諸法意先導,意主意造作",
+        "你只有行動的權利,沒有對結果的權利",
+        "靈魂不生亦不滅",
+        "引我從虛妄至真實",
+        "捨棄一切法(教條),唯皈依我一人",
+        "我們的心若不安息於你,便不得安寧",
+    )
+
+    def test_removed_in_copyright_wordings_do_not_return(self):
+        for base in (PORTABLE_DIR, CLAUDE_DIR):
+            for path in sorted((base / "references").glob("*.md")):
+                text = path.read_text(encoding="utf-8")
+                for wording in self.REMOVED_WORDINGS:
+                    self.assertNotIn(wording, text, (path.name, wording))
+
+    def test_generated_renderings_declare_a_public_domain_original(self):
+        # Every project-generated rendering names its public-domain source language and basis, and its
+        # rights note says it is not a published edition — the marker B3/the renderer relies on.
+        generated = [r for r in self.all_records if r.get("representation_kind") == "generated-rendering"]
+        self.assertGreaterEqual(len(generated), 14)  # 5 Qur'an + 1 ḥadīth + 1 Dhammapada + 7 Sanskrit
+        for r in generated:
+            prov = r["provenance"]
+            lang = prov.get("source_language")
+            self.assertTrue(lang and lang != "lzh", (r["work"], r["locator"]))  # a rendering has a non-Chinese source
+            self.assertTrue(prov.get("basis", "").startswith("public-domain-original"), (r["work"], r["locator"]))
+            self.assertEqual(r["rendering_mode"], "meaning-rendering", (r["work"], r["locator"]))
+            self.assertIn("not a published edition", r["rights"], (r["work"], r["locator"]))
 
     # ---- span integrity + snapshot reproducibility ----------------------------------------
     def test_snapshot_roundtrip_and_full_span_integrity(self):

@@ -75,8 +75,8 @@ class SurfaceConformanceTest(unittest.TestCase):
         for expected in (
             "DISCLAIMER.md",
             "README.md",
-            "skills/religion-council/SKILL.md",
-            ".claude/skills/religion-council/SKILL.md",
+            "skills/worldwide-council/SKILL.md",
+            ".claude/skills/worldwide-council/SKILL.md",
             ".claude/agents/council-moderator.md",
         ):
             self.assertIn(expected, covered)

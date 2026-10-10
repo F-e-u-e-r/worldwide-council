@@ -15,7 +15,7 @@ from evidence_snapshot import EvidenceStore  # noqa: E402
 
 
 def load_retriever():
-    path = ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py"
+    path = ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
     spec = importlib.util.spec_from_file_location("religion_retrieve_a1", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -59,10 +59,13 @@ class PipelineCarryThroughTest(unittest.TestCase):
         envelope, _ = islam_envelope()
         seeds = adapter.adapt(envelope, self.store)
         rendering = next(s for s in seeds if s.work == "古蘭經" and s.locator == "51:56")
-        self.assertEqual(rendering.declared_representation_kind, "published-translation")
+        # Replace-first rights policy (2026-09-28): the Qur'an excerpts are the project's own
+        # generated meaning-renderings of the Arabic, never a third-party published translation.
+        self.assertEqual(rendering.declared_representation_kind, "generated-rendering")
         self.assertEqual(rendering.declared_rendering_mode, "meaning-rendering")
-        self.assertEqual(rendering.provenance["translator"], "馬堅")
-        self.assertIn("copyright", rendering.rights)
+        self.assertEqual(rendering.provenance["source_language"], "ar")
+        self.assertNotIn("translator", rendering.provenance)
+        self.assertIn("not a published edition", rendering.rights)
         # an uncurated occurrence carries none
         summary = next(s for s in seeds if s.declared_evidence_type == "source-bound-summary")
         self.assertIsNone(summary.declared_representation_kind)
@@ -73,9 +76,9 @@ class PipelineCarryThroughTest(unittest.TestCase):
         seeds = adapter.adapt(envelope, self.store)
         catalog = cb.EvidenceCatalog.from_seeds_and_records(seeds, records)
         rendering = next(s for s in catalog.seeds if s.locator == "51:56")
-        self.assertEqual(rendering.representation_kind, "published-translation")
+        self.assertEqual(rendering.representation_kind, "generated-rendering")
         self.assertEqual(rendering.rendering_mode, "meaning-rendering")
-        self.assertEqual(rendering.provenance["translator"], "馬堅")
+        self.assertEqual(rendering.provenance["source_language"], "ar")
         # the prompt listing flags the rendering so a panelist won't treat it as the original
         line = next(
             prompt_line
@@ -83,7 +86,7 @@ class PipelineCarryThroughTest(unittest.TestCase):
             if "51:56" in prompt_line
         )
         self.assertIn("meaning-rendering", line)
-        self.assertIn("published-translation", line)
+        self.assertIn("generated-rendering", line)
 
     def test_catalog_state_round_trip_preserves_presentation(self):
         envelope, records = islam_envelope()
@@ -92,7 +95,7 @@ class PipelineCarryThroughTest(unittest.TestCase):
         rebuilt = cb.EvidenceCatalog.from_state(json.loads(json.dumps(catalog.to_state())))
         rendering = next(s for s in rebuilt.seeds if s.locator == "51:56")
         self.assertEqual(rendering.rendering_mode, "meaning-rendering")
-        self.assertEqual(rendering.representation_kind, "published-translation")
+        self.assertEqual(rendering.representation_kind, "generated-rendering")
 
     def test_uncurated_tradition_has_no_marker(self):
         records = RETRIEVE.parse_reference("confucianism")

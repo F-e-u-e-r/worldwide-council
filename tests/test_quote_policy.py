@@ -21,12 +21,12 @@ def load_module(name, path):
 
 GEN = load_module("generate_quote_policy", ROOT / "scripts" / "generate_quote_policy.py")
 
-PORTABLE_SKILL = ROOT / "skills" / "religion-council" / "SKILL.md"
-CLAUDE_SKILL = ROOT / ".claude" / "skills" / "religion-council" / "SKILL.md"
+PORTABLE_SKILL = ROOT / "skills" / "worldwide-council" / "SKILL.md"
+CLAUDE_SKILL = ROOT / ".claude" / "skills" / "worldwide-council" / "SKILL.md"
 PYTHON_MODULE = ROOT / "orchestrator" / "generated_quote_policy.py"
 DISCLAIMER = ROOT / "DISCLAIMER.md"
 CONTRIBUTING = ROOT / "CONTRIBUTING.md"
-CLAUDE_USAGE = ROOT / ".claude" / "skills" / "religion-council" / "USAGE.md"
+CLAUDE_USAGE = ROOT / ".claude" / "skills" / "worldwide-council" / "USAGE.md"
 
 
 def rule_text(manifest, rule_id, locale="en"):

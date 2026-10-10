@@ -37,13 +37,13 @@
   },
   "required_surfaces": [
     {
-      "path": "skills/religion-council/SKILL.md",
+      "path": "skills/worldwide-council/SKILL.md",
       "role": "portable skill",
       "locales": ["en"],
       "must_contain": ["weaponization-first", "attack ideas, not people"]
     },
     {
-      "path": ".claude/skills/religion-council/SKILL.md",
+      "path": ".claude/skills/worldwide-council/SKILL.md",
       "role": "Claude project skill",
       "locales": ["zh-Hant"],
       "must_contain": ["weaponization-first", "武器化", "對事不對人"]

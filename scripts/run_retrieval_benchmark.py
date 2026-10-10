@@ -38,7 +38,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PORTABLE_RETRIEVER = ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py"
+PORTABLE_RETRIEVER = ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
 PROJECT_RETRIEVER = ROOT / "orchestrator" / "project_retrieve.py"
 QUERIES_PATH = ROOT / "docs" / "benchmarks" / "queries" / "retrieval-v1.json"
 JUDGMENTS_PATH = ROOT / "docs" / "benchmarks" / "judgments" / "retrieval-v1.json"

@@ -15,9 +15,9 @@
       "occ/v1-corpus-stable": 37
     },
     "records_evaluated": 37,
-    "representation_metadata_records": 12,
+    "representation_metadata_records": 23,
     "required_envelope_fields_present": true,
-    "rights_metadata_records": 13,
+    "rights_metadata_records": 24,
     "source_assurance_artifact_backed_count": 37,
     "span_assurance": {
       "all_records_artifact_backed": true,
@@ -506,12 +506,12 @@
           "work": "馬太福音"
         },
         {
-          "locator": "51:56",
+          "locator": "reference file entry",
           "rank": 5,
           "relevance": 0,
           "score": 2,
-          "tradition": "islam",
-          "work": "古蘭經"
+          "tradition": "mohism",
+          "work": "墨子·非攻上"
         }
       ]
     },
@@ -539,7 +539,7 @@
           "locator": "2:47",
           "rank": 1,
           "relevance": 2,
-          "score": 15,
+          "score": 13,
           "tradition": "hinduism",
           "work": "薄伽梵歌"
         },
@@ -854,16 +854,8 @@
           "work": "布哈里聖訓實錄"
         },
         {
-          "locator": "1(南傳)",
-          "rank": 2,
-          "relevance": 0,
-          "score": 1,
-          "tradition": "buddhism",
-          "work": "法句經"
-        },
-        {
           "locator": "1:1",
-          "rank": 3,
+          "rank": 2,
           "relevance": 0,
           "score": 1,
           "tradition": "christianity",
@@ -871,7 +863,7 @@
         },
         {
           "locator": "1:2",
-          "rank": 4,
+          "rank": 3,
           "relevance": 0,
           "score": 1,
           "tradition": "christianity",
@@ -879,11 +871,19 @@
         },
         {
           "locator": "(引商鞅之意)",
-          "rank": 5,
+          "rank": 4,
           "relevance": 0,
           "score": 1,
           "tradition": "legalism",
           "work": "商君書·更法"
+        },
+        {
+          "locator": "22:37-39",
+          "rank": 5,
+          "relevance": 0,
+          "score": 1,
+          "tradition": "christianity",
+          "work": "馬太福音"
         }
       ]
     },
@@ -949,16 +949,8 @@
       "query_id": "q015",
       "retrieved": [
         {
-          "locator": "2:20",
-          "rank": 1,
-          "relevance": 0,
-          "score": 1,
-          "tradition": "hinduism",
-          "work": "薄伽梵歌"
-        },
-        {
           "locator": "1.4.10",
-          "rank": 2,
+          "rank": 1,
           "relevance": 0,
           "score": 1,
           "tradition": "hinduism",
@@ -966,7 +958,7 @@
         },
         {
           "locator": "1(南傳)",
-          "rank": 3,
+          "rank": 2,
           "relevance": 0,
           "score": 0,
           "tradition": "buddhism",
@@ -974,7 +966,7 @@
         },
         {
           "locator": "2:47",
-          "rank": 4,
+          "rank": 3,
           "relevance": 0,
           "score": 0,
           "tradition": "hinduism",
@@ -982,11 +974,19 @@
         },
         {
           "locator": "偈(漢傳常引)",
-          "rank": 5,
+          "rank": 4,
           "relevance": 0,
           "score": 0,
           "tradition": "buddhism",
           "work": "大般涅槃經"
+        },
+        {
+          "locator": "1:1",
+          "rank": 5,
+          "relevance": 0,
+          "score": 0,
+          "tradition": "christianity",
+          "work": "創世記"
         }
       ],
       "top1_score": 1

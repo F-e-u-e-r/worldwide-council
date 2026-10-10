@@ -6,11 +6,11 @@
 
 ## English
 
-Worldview Council supports three execution modes:
+Worldwide Council supports three execution modes:
 
 | Mode | Moderator | Panelists | Best for |
 |---|---|---|---|
-| **1. Claude Code** | Claude | Claude custom subagents | Native Claude workflow with the bundled 37-agent roster. |
+| **1. Claude Code** | Claude | Claude custom subagents | Native Claude workflow with the bundled 38-agent roster. |
 | **2. Codex** | Codex | Native Codex subagents when explicitly requested | Portable Codex skill and direct Codex use. |
 | **3. Claude + Codex** | Claude | Persistent Codex MCP threads | Deterministic fan-out, round barriers, retries, and persisted audit records. |
 
@@ -40,13 +40,37 @@ Start Claude Code at the repository root:
 claude
 ```
 
-Claude Code loads `.claude/agents/` and `.claude/skills/religion-council/`. Ask:
+Claude Code loads `.claude/agents/` and `.claude/skills/worldwide-council/`. Ask:
 
 > 用議會討論:人生有沒有意義?請佛教、道教、儒家三家先各自陳述,再交叉辯論。
 
 The `council-moderator` dispatches the selected `council-*` custom subagents and synthesizes
 their responses. Custom subagents are loaded at session start; restart Claude Code after adding
 or changing an agent definition.
+
+### Install as a plugin (run from any directory)
+
+The repository is also a Claude Code plugin with its own marketplace file, so you can install it
+once and convene a council from any working directory:
+
+```bash
+claude plugin marketplace add F-e-u-e-r/religion-council      # once
+claude plugin install worldwide-council@worldwide-council
+cd ~/anywhere && claude --agent worldwide-council:council-moderator
+```
+
+Agents, the portable skill and the hybrid controller (`plugin:worldwide-council:worldwide-council-controller`,
+run state under `${CLAUDE_PLUGIN_DATA}`) load from the installed copy. Two things to know:
+
+- `claude plugin details worldwide-council` lists `Agents (0)`: the inventory only scans a plugin's
+  default `agents/` folder, while this plugin declares its agents under `.claude/agents/` in the
+  manifest. They do load — `claude --agent no-such-agent` lists every `worldwide-council:council-*`.
+- If your user settings set `permissions.blockReadsOutsideWorkingDirectories: true`, the agents
+  cannot read the plugin's own reference files from an unrelated directory. Start with
+  `claude --add-dir <plugin cache root>` (the path `claude plugin list --json` reports) or add it
+  to `permissions.additionalDirectories`.
+
+The runtime acceptance record for this path is `docs/release/v0.14-installed-copy-acceptance.md`.
 
 ## Mode 2 — Codex
 
@@ -59,11 +83,11 @@ https://github.com/F-e-u-e-r/religion-council/tree/main/skills/religion-council
 
 Restart Codex, then invoke:
 
-> Use $religion-council to convene a sourced roundtable on whether life has meaning.
+> Use $worldwide-council to convene a sourced roundtable on whether life has meaning.
 
 To request native parallel panelists explicitly:
 
-> Use $religion-council. Spawn one independent Codex agent for each of the eight traditions,
+> Use $worldwide-council. Spawn one independent Codex agent for each of the eight traditions,
 > keep Round 1 independent, then conduct one rebuttal round.
 
 ### Configure native Codex agent capacity
@@ -96,13 +120,13 @@ do not copy secrets or machine-specific MCP paths into project configuration.
 
 ## Mode 3 — Claude Moderator + Codex Panelists
 
-This repository includes a project-level `.mcp.json` that starts:
+This repository includes a project-level `.mcp.json` (no shell: it launches `${RC_PYTHON:-python3}` directly — set `RC_PYTHON=python` on a system where `python3` is not on PATH) that starts:
 
 ```text
 Claude moderator
        |
        v
-Worldview Council controller (Python MCP server)
+Worldwide Council controller (Python MCP server)
        |
        v
 codex mcp-server
@@ -135,7 +159,7 @@ unvalidated `[Text]`, missing verification, and unsupported protocols before ren
 ### Strict finalization (v0.9.0)
 
 Strict mode is an opt-in hybrid-controller workflow. It requires Python 3.9+, an authenticated
-Codex CLI (`codex login`), and an approved `religion-council-controller` project MCP server in
+Codex CLI (`codex login`), and an approved `worldwide-council-controller` project MCP server in
 Claude Code. It also requires a `religion-council/retrieval/v1` `evidence_envelope`; there is no
 degraded strict path without one.
 
@@ -205,11 +229,11 @@ codex login
 claude
 ```
 
-In Claude Code, open `/mcp` and approve `religion-council-controller` if the project server is
+In Claude Code, open `/mcp` and approve `worldwide-council-controller` if the project server is
 pending. Then ask:
 
-> Act as the moderator. Use the religion-council-controller MCP tools with
-> `orchestrator/panelists/religion-8.json`. Start an independent opening round on whether life
+> Act as the moderator. Use the worldwide-council-controller MCP tools with
+> `orchestrator/panelists/worldwide-10.json` (the default ten-voice council). Start an independent opening round on whether life
 > has meaning, collect all results, build an anonymized issue matrix, run one reply round on the
 > same Codex threads, and produce the final synthesis.
 
@@ -217,7 +241,7 @@ For a generic 30-member panel, use
 `orchestrator/panelists/thirty-member-example.json`. Customize that JSON instead of embedding a
 large roster in the moderator prompt.
 
-Run records are written atomically under `.religion-council/runs/<run-id>/state.json` and are
+Run records are written atomically under `.worldwide-council/runs/<run-id>/state.json` and are
 ignored by Git. Each Codex panelist runs read-only with approval policy `never`.
 
 Before relying on Mode 3 after installing or upgrading Codex CLI, run one authenticated live
@@ -252,7 +276,7 @@ result, but exact-once execution cannot be guaranteed by the current experimenta
 The current dependency-free lexical retrieval can be tested independently:
 
 ```bash
-python3 skills/religion-council/scripts/retrieve.py \
+python3 skills/worldwide-council/scripts/retrieve.py \
   --tradition buddhism --query "the meaning of life"
 ```
 
@@ -263,11 +287,11 @@ Valid codes: `christianity`, `islam`, `hinduism`, `buddhism`, `taoism`, `legalis
 
 ## 繁體中文
 
-Worldview Council 支援三種執行方式:
+Worldwide Council 支援三種執行方式:
 
 | 模式 | 主持人 | 議員 | 適合 |
 |---|---|---|---|
-| **1. Claude Code** | Claude | Claude custom subagent | 使用內附 37 個 agent 的 Claude 原生流程。 |
+| **1. Claude Code** | Claude | Claude custom subagent | 使用內附 38 個 agent 的 Claude 原生流程。 |
 | **2. Codex** | Codex | 明確要求時使用 Codex 原生 subagent | 可攜 Codex skill 與直接使用 Codex。 |
 | **3. Claude + Codex** | Claude | 持久化 Codex MCP thread | 固定併發、輪次 barrier、重試與完整紀錄。 |
 
@@ -294,12 +318,34 @@ cd religion-council
 claude
 ```
 
-Claude Code 會載入 `.claude/agents/` 與 `.claude/skills/religion-council/`。例如:
+Claude Code 會載入 `.claude/agents/` 與 `.claude/skills/worldwide-council/`。例如:
 
 > 用議會討論:人生有沒有意義?請佛教、道教、儒家三家先各自陳述,再交叉辯論。
 
 `council-moderator` 會調度指定的 `council-*` custom subagent。新增或修改 agent 定義後,
 需重開 Claude Code session。
+
+### 以 plugin 安裝(可在任何目錄啟動)
+
+本 repo 同時是一個 Claude Code plugin,並附自己的 marketplace 檔;安裝一次後可在任何工作目錄召集議會:
+
+```bash
+claude plugin marketplace add F-e-u-e-r/religion-council      # 只需一次
+claude plugin install worldwide-council@worldwide-council
+cd ~/anywhere && claude --agent worldwide-council:council-moderator
+```
+
+agents、可攜 skill 與 hybrid controller(`plugin:worldwide-council:worldwide-council-controller`,run state 放在
+`${CLAUDE_PLUGIN_DATA}`)都從安裝副本載入。兩件要知道的事:
+
+- `claude plugin details worldwide-council` 會顯示 `Agents (0)`:inventory 只掃描 plugin 預設的 `agents/`
+  資料夾,而本 plugin 是在 manifest 裡宣告 `.claude/agents/` 下的 agent。它們確實會載入——執行
+  `claude --agent no-such-agent` 會列出全部 `worldwide-council:council-*`。
+- 若你的使用者設定有 `permissions.blockReadsOutsideWorkingDirectories: true`,agent 在無關目錄下無法讀取
+  plugin 自己的 references。請以 `claude --add-dir <plugin cache 根目錄>`(`claude plugin list --json`
+  會列出路徑)啟動,或把該目錄加進 `permissions.additionalDirectories`。
+
+此安裝路徑的 runtime 驗收紀錄見 `docs/release/v0.14-installed-copy-acceptance.md`。
 
 ## 模式 2 — Codex
 
@@ -312,11 +358,11 @@ https://github.com/F-e-u-e-r/religion-council/tree/main/skills/religion-council
 
 重開 Codex 後呼叫:
 
-> Use $religion-council to convene a sourced roundtable on whether life has meaning.
+> Use $worldwide-council to convene a sourced roundtable on whether life has meaning.
 
 若要使用原生平行 agent,須明確要求:
 
-> Use $religion-council. Spawn one independent Codex agent for each of the eight traditions,
+> Use $worldwide-council. Spawn one independent Codex agent for each of the eight traditions,
 > keep Round 1 independent, then conduct one rebuttal round.
 
 ### 設定 Codex 原生 agent 容量
@@ -346,18 +392,18 @@ codex doctor --summary
 
 ## 模式 3 — Claude 主持 + Codex 議員
 
-Repo 內的 `.mcp.json` 會啟動 Python controller,再由 controller 管理 `codex mcp-server`:
+Repo 內的 `.mcp.json`(不經 shell,直接啟動 `${RC_PYTHON:-python3}`;若系統沒有 `python3`,設 `RC_PYTHON=python`)會啟動 Python controller,再由 controller 管理 `codex mcp-server`:
 
 ```text
 Claude 主持人
-    → Worldview Council controller
+    → Worldwide Council controller
     → codex mcp-server
     → 多條持久 Codex thread
 ```
 
 Controller 提供 `debate_start`、`debate_collect`、`debate_finalize`、`debate_reply`、`debate_retry`、
 `debate_status` 六個 MCP tools。它會保存 `panelist ID ↔ threadId`、等待全員完成才跨過
-round barrier,並把紀錄寫到 `.religion-council/runs/<run-id>/state.json`。
+round barrier,並把紀錄寫到 `.worldwide-council/runs/<run-id>/state.json`。
 
 `debate_start` 另有 opt-in B1b 結構化路徑:同時傳入 `structured_claims=true` 與
 `retrieve_envelope(...)` 產生的 `evidence_envelope`。Controller 會把 compact evidence seed ID
@@ -372,7 +418,7 @@ protocol。
 ### Strict finalization（v0.9.0）
 
 strict mode 是 opt-in 的 hybrid-controller workflow。它需要 Python 3.9+、已用 `codex login`
-登入的 Codex CLI，以及在 Claude Code 中已批准的 `religion-council-controller` project MCP server。
+登入的 Codex CLI，以及在 Claude Code 中已批准的 `worldwide-council-controller` project MCP server。
 它也必須提供 `religion-council/retrieval/v1` 的 `evidence_envelope`；沒有 evidence envelope 時不會
 降級執行 strict。
 
@@ -438,10 +484,10 @@ codex login
 claude
 ```
 
-在 Claude Code 用 `/mcp` 批准 `religion-council-controller`,然後說:
+在 Claude Code 用 `/mcp` 批准 `worldwide-council-controller`,然後說:
 
-> 請擔任主持人,使用 religion-council-controller MCP tools 和
-> `orchestrator/panelists/religion-8.json`,讓八個 Codex 議員獨立完成首輪;收齊後建立匿名
+> 請擔任主持人,使用 worldwide-council-controller MCP tools 和
+> `orchestrator/panelists/worldwide-10.json`(預設十席議會),讓十位 Codex 議員獨立完成首輪;收齊後建立匿名
 > issue matrix,再用相同 threadId 跑第二輪,最後綜合。
 
 通用 30 人 panel 可使用 `orchestrator/panelists/thirty-member-example.json`。
@@ -469,7 +515,7 @@ claude mcp get codex
 ## 檢索 Stub
 
 ```bash
-python3 skills/religion-council/scripts/retrieve.py \
+python3 skills/worldwide-council/scripts/retrieve.py \
   --tradition buddhism --query "人生的意義"
 ```
 

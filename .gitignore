@@ -24,6 +24,7 @@ env/
 /index/
 /.cache/
 /.religion-council/
+/.worldwide-council/
 
 # Per-user agent settings (shared .mcp.json remains tracked)
 /.claude/settings.local.json
@@ -35,3 +36,6 @@ env/
 .vscode/
 *.swp
 *~
+
+# Local skills staging (uncommitted handbook draft)
+/skills-staging/

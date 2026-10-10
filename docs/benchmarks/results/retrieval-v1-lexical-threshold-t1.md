@@ -31,7 +31,7 @@
 - Required envelope fields present: **True**
 - Deterministic repeat (identical ranking on a second pass): **True**
 - source_assurance artifact-backed: 37/37 retrieved records
-- Curated metadata among retrieved records: representation_kind=12, rights=13
+- Curated metadata among retrieved records: representation_kind=23, rights=24
 - **Citation fidelity** (returned+relevant records with a reproducible occurrence id across two runs and a reordering): **1.000** (19/19 records)
 - Span assurance at retrieval: tier_at_retrieval=`None`, source_assurance floor=`artifact-backed` (37/37 records), edition-backed-span-verified=**False**
 - _retrieval mints no span-assurance tier; curated-snapshot-span-verified is minted at B2 and edition-backed-span-verified is reserved for A2 — beating this benchmark upgrades neither (docs/benchmarks/retrieval-v1.md hard constraint 6)._
@@ -47,7 +47,7 @@
 ## Operational (snapshot — machine-specific, not part of the reproducible metrics)
 
 - records searched per query: 56
-- total: 0.0227s · avg query: 1.2585 ms · max query: 2.7160 ms
+- total: 0.0233s · avg query: 1.2964 ms · max query: 1.9755 ms
 
 ## Per-query results
 
@@ -60,14 +60,14 @@
 | q005 | exact_locator | 1 | 1.000 | hit | 約翰福音·3:16 (score 23) |
 | q006 | exact_locator | 1 | 1.000 | hit | 古蘭經·1:1(開端章) (score 15) |
 | q007 | paraphrased | 2 | 1.000 | hit | 彌迦書·6:8 (score 4) |
-| q008 | paraphrased | 1 | 1.000 | hit | 薄伽梵歌·2:47 (score 15) |
+| q008 | paraphrased | 1 | 1.000 | hit | 薄伽梵歌·2:47 (score 13) |
 | q009 | paraphrased | 1 | 1.000 | hit | 彌迦書·6:8 (score 12) |
 | q010 | cross_tradition | 1 | 0.250 | hit | 廣林奧義書·1.3.28 (score 4) |
 | q011 | cross_tradition | 1 | 1.000 | hit | 馬太福音·22:37-39 (score 14) |
 | q012 | cross_lingual | 1 | 1.000 | hit | 歌者奧義書·6.8.7 (score 16) |
 | q013 | cross_lingual | 1 | 1.000 | hit | 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 6) |
 | q014 | no_answer | — | — | false_support | 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 1) |
-| q015 | no_answer | — | — | false_support | 薄伽梵歌·2:20 (score 1) |
+| q015 | no_answer | — | — | false_support | 廣林奧義書·1.4.10 (score 1) |
 | q016 | ambiguous | 2 | 0.750 | hit | 薄伽梵歌·2:47 (score 11) |
 | q017 | duplicate_near_duplicate | 1 | 1.000 | hit | 道德經·25 (score 11) |
 | q018 | duplicate_near_duplicate | 1 | 1.000 | hit | 法句經·1(南傳) (score 17) |
@@ -81,7 +81,7 @@
 
 **False support (no-answer query surfaced a lexical match):**
 - `q014`: '區塊鏈與加密貨幣的投資策略' surfaced 布哈里聖訓實錄·開卷傳述(附傳述鏈) at score 1 — a spurious lexical overlap, not support.
-- `q015`: '最新智慧型手機的硬體規格比較' surfaced 薄伽梵歌·2:20 at score 1 — a spurious lexical overlap, not support.
+- `q015`: '最新智慧型手機的硬體規格比較' surfaced 廣林奧義書·1.4.10 at score 1 — a spurious lexical overlap, not support.
 
 ## Interpretation
 

@@ -144,7 +144,7 @@ class CommittedFixtureModelJudgeTest(unittest.TestCase):
     def test_pool_records_exist_in_corpus(self):
         # every pooled (tradition, work, locator) must be a real corpus record — no phantom items.
         portable = _load(
-            "rc_portable_pool", ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py")
+            "rc_portable_pool", ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py")
         corpus = set()
         for tradition in portable.TRADITIONS:
             for rec in portable.parse_reference(tradition):

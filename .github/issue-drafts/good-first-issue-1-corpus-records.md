@@ -13,7 +13,7 @@ Adding a well-sourced record to a tradition directly improves benchmark coverage
 
 1. Pick a tradition and a teaching that is **missing** from its `references/<tradition>.md`.
 2. Find a **public-domain** source text (original language preferred; mark translations as renderings).
-3. Add the record to **both** `skills/religion-council/references/<tradition>.md` and `.claude/skills/religion-council/references/<tradition>.md` (they must stay byte-identical except for the two documented differences — see [CONTRIBUTING.md](../../CONTRIBUTING.md)).
+3. Add the record to **both** `skills/worldwide-council/references/<tradition>.md` and `.claude/skills/worldwide-council/references/<tradition>.md` (they must stay byte-identical except for the two documented differences — see [CONTRIBUTING.md](../../CONTRIBUTING.md)).
 4. Add a `presentation.json` entry with `provenance` and `rights` fields.
 5. Run `python3 scripts/corpus_inventory.py --check` and `python3 -m unittest discover -s tests -v` to verify.
 

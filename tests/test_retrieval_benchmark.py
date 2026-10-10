@@ -283,10 +283,13 @@ class RetrievalBenchmarkTest(unittest.TestCase):
             # Committed reports are a contract — a missing file is a broken pin, not a skip
             # (a silent skip here once read as "reproducibility verified" when nothing ran).
             self.fail(
-                "committed threshold t=2 result is missing — regenerate with:\n"
+                "committed threshold t=2 result is missing — regenerate with (canonical procedure:"
+                " docs/benchmarks/retrieval-v1.md):\n"
                 "  python scripts/run_retrieval_benchmark.py --candidate lexical-threshold"
                 " --threshold 2 \\\n"
-                "    --json-out docs/benchmarks/results/retrieval-v1-lexical-threshold-t2.json"
+                "    --baseline-json docs/benchmarks/results/retrieval-v1-lexical-baseline.json \\\n"
+                "    --json-out docs/benchmarks/results/retrieval-v1-lexical-threshold-t2.json \\\n"
+                "    --md-out docs/benchmarks/results/retrieval-v1-lexical-threshold-t2.md"
             )
         committed = json.loads(t2_path.read_text(encoding="utf-8"))
         fresh = self.bm.reproducible_view(self.bm.run_benchmark(
@@ -403,9 +406,12 @@ class RetrievalBenchmarkTest(unittest.TestCase):
         if not path.exists():
             # Committed reports are a contract — a missing file is a broken pin, not a skip.
             self.fail(
-                "committed bm25 result is missing — regenerate with:\n"
+                "committed bm25 result is missing — regenerate with (canonical procedure:"
+                " docs/benchmarks/retrieval-v1.md):\n"
                 "  python scripts/run_retrieval_benchmark.py --candidate lexical-bm25 \\\n"
-                "    --json-out docs/benchmarks/results/retrieval-v1-lexical-bm25.json"
+                "    --baseline-json docs/benchmarks/results/retrieval-v1-lexical-baseline.json \\\n"
+                "    --json-out docs/benchmarks/results/retrieval-v1-lexical-bm25.json \\\n"
+                "    --md-out docs/benchmarks/results/retrieval-v1-lexical-bm25.md"
             )
         committed = json.loads(path.read_text(encoding="utf-8"))
         fresh = self.bm.reproducible_view(self.bm.run_benchmark(
@@ -484,9 +490,11 @@ class RetrievalBenchmarkTest(unittest.TestCase):
             if not path.exists():
                 # Committed reports are a contract — a missing file is a broken pin, not a skip.
                 self.fail(
-                    "committed bm25 threshold t={} result is missing — regenerate with:\n"
+                    "committed bm25 threshold t={} result is missing — regenerate with (canonical"
+                    " procedure: docs/benchmarks/retrieval-v1.md):\n"
                     "  python scripts/run_retrieval_benchmark.py --candidate"
                     " lexical-bm25-threshold --threshold {} \\\n"
+                    "    --baseline-json docs/benchmarks/results/retrieval-v1-lexical-baseline.json \\\n"
                     "    --json-out docs/benchmarks/results/"
                     "retrieval-v1-lexical-bm25-threshold-t{}.json".format(
                         threshold, threshold, threshold
@@ -498,6 +506,26 @@ class RetrievalBenchmarkTest(unittest.TestCase):
             self.assertEqual(committed, fresh)
 
     # ---- committed baseline ----
+
+    def test_committed_markdown_reports_keep_their_comparison_sections(self):
+        # Reproducibility procedure gate (review finding, 2026-09-28): the JSON pins above cannot see a
+        # Markdown report rendered without `--baseline-json` / out of dependency order, which silently
+        # drops the comparison sections. Pin the section contract instead of the numbers.
+        results = ROOT / "docs" / "benchmarks" / "results"
+        baseline_section = "## Comparison vs. v0.12.2 lexical baseline"
+        expected = {
+            "threshold-t1": (baseline_section,),
+            "threshold-t2": (baseline_section,),
+            "threshold-t3": (baseline_section,),
+            "threshold-t5": (baseline_section,),
+            "bm25": (baseline_section, "## Comparison vs. v0.12.3 threshold candidates"),
+            "bm25-threshold-t2": (baseline_section, "## Comparison across retrieval-v1 reference candidates"),
+            "bm25-threshold-t3": (baseline_section, "## Comparison across retrieval-v1 reference candidates"),
+        }
+        for name, sections in expected.items():
+            text = (results / "retrieval-v1-lexical-{}.md".format(name)).read_text(encoding="utf-8")
+            for section in sections:
+                self.assertIn(section, text, (name, section))
 
     def test_committed_baseline_report_is_reproducible(self):
         committed = json.loads(RESULT_JSON.read_text(encoding="utf-8"))

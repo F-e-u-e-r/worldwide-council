@@ -1,0 +1,75 @@
+{
+  "$schema": "https://code.claude.com/schemas/plugin.json",
+  "name": "worldwide-council",
+  "displayName": "Worldwide Council",
+  "version": "0.13.1",
+  "description": "Source-grounded, moderated roundtable across religious, philosophical and ethical worldviews: a neutral moderator convenes 37 voices, with source-grounded retrieval for 8 evidence-backed traditions plus additional interpretive personas (denominations, thinkers, secular) for broader comparison; every line is tagged [Text] (verbatim, with locator) or [Interpretation]. 以原典為據、由中立主持人調度的多傳統哲學議會。",
+  "author": {
+    "name": "Worldwide Council contributors",
+    "url": "https://github.com/F-e-u-e-r/religion-council"
+  },
+  "homepage": "https://github.com/F-e-u-e-r/religion-council#readme",
+  "repository": "https://github.com/F-e-u-e-r/religion-council",
+  "license": "MIT AND CC-BY-4.0",
+  "keywords": [
+    "philosophy",
+    "religion",
+    "worldview",
+    "debate",
+    "multi-agent",
+    "citation-verification",
+    "source-grounding",
+    "mcp"
+  ],
+  "agents": [
+    "./.claude/agents/council-aquinas.md",
+    "./.claude/agents/council-augustine.md",
+    "./.claude/agents/council-buddhism.md",
+    "./.claude/agents/council-calvin.md",
+    "./.claude/agents/council-catholic.md",
+    "./.claude/agents/council-christianity.md",
+    "./.claude/agents/council-confucianism.md",
+    "./.claude/agents/council-confucius.md",
+    "./.claude/agents/council-ghazali.md",
+    "./.claude/agents/council-hinduism.md",
+    "./.claude/agents/council-ibn-rushd.md",
+    "./.claude/agents/council-islam.md",
+    "./.claude/agents/council-jesus.md",
+    "./.claude/agents/council-judaism.md",
+    "./.claude/agents/council-krishna.md",
+    "./.claude/agents/council-laozi.md",
+    "./.claude/agents/council-legalism.md",
+    "./.claude/agents/council-luther.md",
+    "./.claude/agents/council-madhva.md",
+    "./.claude/agents/council-mencius.md",
+    "./.claude/agents/council-mill.md",
+    "./.claude/agents/council-moderator.md",
+    "./.claude/agents/council-mohism.md",
+    "./.claude/agents/council-muhammad.md",
+    "./.claude/agents/council-nagarjuna.md",
+    "./.claude/agents/council-orthodox.md",
+    "./.claude/agents/council-protestant.md",
+    "./.claude/agents/council-pureland.md",
+    "./.claude/agents/council-ramanuja.md",
+    "./.claude/agents/council-secular-humanist.md",
+    "./.claude/agents/council-shakyamuni.md",
+    "./.claude/agents/council-shankara.md",
+    "./.claude/agents/council-shia.md",
+    "./.claude/agents/council-sunni.md",
+    "./.claude/agents/council-taoism.md",
+    "./.claude/agents/council-vasubandhu.md",
+    "./.claude/agents/council-xunzi.md",
+    "./.claude/agents/council-zhuangzi.md"
+  ],
+  "mcpServers": {
+    "worldwide-council-controller": {
+      "command": "python3",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/orchestrator/debate_controller.py",
+        "--state-dir",
+        "${CLAUDE_PLUGIN_DATA}/runs",
+        "serve"
+      ]
+    }
+  }
+}
