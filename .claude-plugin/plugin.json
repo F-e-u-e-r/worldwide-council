@@ -6,10 +6,10 @@
   "description": "Source-grounded, moderated roundtable across religious, philosophical and ethical worldviews: a neutral moderator convenes 37 voices, with source-grounded retrieval for 8 evidence-backed traditions plus additional interpretive personas (denominations, thinkers, secular) for broader comparison; every line is tagged [Text] (verbatim, with locator) or [Interpretation]. 以原典為據、由中立主持人調度的多傳統哲學議會。",
   "author": {
     "name": "Worldwide Council contributors",
-    "url": "https://github.com/F-e-u-e-r/religion-council"
+    "url": "https://github.com/F-e-u-e-r/worldwide-council"
   },
-  "homepage": "https://github.com/F-e-u-e-r/religion-council#readme",
-  "repository": "https://github.com/F-e-u-e-r/religion-council",
+  "homepage": "https://github.com/F-e-u-e-r/worldwide-council#readme",
+  "repository": "https://github.com/F-e-u-e-r/worldwide-council",
   "license": "MIT AND CC-BY-4.0",
   "keywords": [
     "philosophy",
