@@ -32,22 +32,22 @@
     no threshold, ranker, backend, vector store, or RAG path is adopted.
   - Ranking + no-answer decision: **accepted** (v0.12.6;
     [ADR 0007](../adr/0007-retrieval-backend-decision.md)).
-    From the four reference runs — lexical baseline, confidence threshold, BM25, and BM25+threshold —
-    ADR 0007 selects **BM25 + lexical-confidence threshold (t2/t3)** as the project retriever's ranking
-    + no-answer policy, scoped as an internals change (ADR 0006 §4.5), with the default-ranking flip
-    gated on the ≥2-judge + κ step (decision gate 2). Broad-thematic recall (q010) is recorded as
-    unresolved.
-  - Backend selection: **deferred.** No RAG / vector / dense / hybrid / built-local-index / network
-    backend is measured or selected by this document or by ADR 0007 — that remains gated on a separate,
-    evidence-justified experiment plus the operational/rights review.
-- Owner stage: the **A2→A3** decision gate ([ADR 0002](../adr/0002-roadmap-stage-nomenclature.md) §1):
-  whether to move retrieval beyond today's file-based lexical ranking to a local index, a hybrid, or
-  a dense/vector backend — and, separately, to a networked RAG service.
-- Relationship: this is the benchmark [ADR 0006](../adr/0006-retriever-fork-contract.md) §6 and its
-  migration phase 5 defer to. ADR 0006 fixed the **contract** (one retrieval envelope, two
-  retrievers, stable identity minted downstream); this document fixes the **evidence bar** a backend
-  must clear before the project retriever may adopt it. The two are deliberately separate: the
-  contract must exist before the benchmark, and the benchmark must exist before a backend.
+  - Committed reports regenerated after the replace-first rights remediation (2026-09-28): the
+    《古蘭經》, ḥadīth,《法句經》1 and four Sanskrit records now carry the project's own generated
+    renderings instead of translations believed to be in copyright or of unverified provenance —
+    replaced in place, same `(work, locator)` and source lines, so the judgments and the blind-judge
+    pool (keyed by work + locator, no text) are unchanged, while the occurrence ids of the rewritten
+    records change because the corpus-stable id hashes the text (ADR 0005). Regenerated in
+    dependency order with `--baseline-json`: every ranking, exact-span and no-answer summary and every
+    per-query rank is identical to the previously committed value; only the metadata counts move
+    (`representation_metadata_records` 12 → 23 lexical / 13 → 23 BM25, `rights_metadata_records`
+    13 → 24 / 16 → 27) because the remaining 和合本 bullets are now curated too. Ranking is
+    text-sensitive: an intermediate, more verbose draft of the renderings had moved q007 under BM25
+    (MRR 0.969 → 0.958); the final terse register, chosen to match the corpus, restored the ranks and
+    no wording was tuned against the benchmark. The ADR 0007 decision and the
+    `bm25_default_flip_authorized: false` guardrail are unaffected. **Evidence classification
+    (owner, 2026-09-28):** The benchmark remains the regression suite for the frozen retrieval contract, but this remediation cycle observed benchmark output before finalizing replacement wording; therefore the post-remediation result is not treated as independent holdout evidence. Proving retrieval generalization later means
+    freezing unseen queries / passages first — not reusing this pool.
 
 ## Why this gate exists
 
@@ -232,6 +232,43 @@ Reported per candidate, per corpus tier, with the lexical baseline as the refere
   ([lexical baseline](results/retrieval-v1-lexical-baseline.md)) so a future backend-selection ADR
   can cite a specific, reproducible run; `tests/test_retrieval_benchmark.py` fails if the committed
   baseline drifts from the runner, and CI validates the fixtures (`--check-fixtures`).
+
+### Regenerating the committed reports (canonical procedure)
+
+The committed `results/` are reproducibility pins: the test suite regenerates every JSON report and
+fails on any difference, and a regeneration that omits the baseline comparison silently drops the
+`## Comparison …` sections from the Markdown reports (a procedure bug caught in review on
+2026-09-28). Always regenerate **all** reports, **in this order**, **with `--baseline-json`**, from
+the repository root:
+
+```bash
+R=docs/benchmarks/results; B=$R/retrieval-v1-lexical-baseline.json
+python scripts/run_retrieval_benchmark.py --retriever project --k 1 --k 3 --k 5 \
+    --json-out $B --md-out $R/retrieval-v1-lexical-baseline.md
+for t in 1 2 3 5; do
+  python scripts/run_retrieval_benchmark.py --candidate lexical-threshold --threshold $t \
+      --baseline-json $B --json-out $R/retrieval-v1-lexical-threshold-t$t.json \
+      --md-out $R/retrieval-v1-lexical-threshold-t$t.md
+done
+for pass in 1 2; do   # the BM25-family Markdown reads sibling committed JSONs at render time
+  python scripts/run_retrieval_benchmark.py --candidate lexical-bm25-threshold --threshold 3 \
+      --baseline-json $B --json-out $R/retrieval-v1-lexical-bm25-threshold-t3.json \
+      --md-out $R/retrieval-v1-lexical-bm25-threshold-t3.md
+  python scripts/run_retrieval_benchmark.py --candidate lexical-bm25 \
+      --baseline-json $B --json-out $R/retrieval-v1-lexical-bm25.json \
+      --md-out $R/retrieval-v1-lexical-bm25.md
+  python scripts/run_retrieval_benchmark.py --candidate lexical-bm25-threshold --threshold 2 \
+      --baseline-json $B --json-out $R/retrieval-v1-lexical-bm25-threshold-t2.json \
+      --md-out $R/retrieval-v1-lexical-bm25-threshold-t2.md
+done
+python -m unittest tests.test_retrieval_benchmark
+```
+
+Then diff the `## ` headings of every Markdown report against the previous commit (they must be
+identical unless a report section was deliberately added) and read the per-query deltas before
+committing. Every report carries `corpus_version` from the `VERSION` file, so a release that bumps
+`VERSION` must regenerate all reports **immediately after the bump** and re-run the reproducibility
+tests in the same change — never a "final" regeneration before the bump.
 
 ## Decision gates
 

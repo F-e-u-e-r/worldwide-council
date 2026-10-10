@@ -5,8 +5,8 @@ One canonical manifest (``policies/quote-admissibility.v2.json``) is the single
 source of truth. This generator renders that manifest into the four surfaces that
 must state the policy:
 
-1. the portable skill (``skills/religion-council/SKILL.md``, English);
-2. the Claude skill (``.claude/skills/religion-council/SKILL.md``, Traditional Chinese);
+1. the portable skill (``skills/worldwide-council/SKILL.md``, English);
+2. the Claude skill (``.claude/skills/worldwide-council/SKILL.md``, Traditional Chinese);
 3. & 4. the controller opening and follow-up prompts, via the generated Python module
    ``orchestrator/generated_quote_policy.py`` whose English constant is inserted into
    both prompts.
@@ -28,8 +28,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = ROOT / "policies" / "quote-admissibility.v2.json"
 
-PORTABLE_SKILL = ROOT / "skills" / "religion-council" / "SKILL.md"
-CLAUDE_SKILL = ROOT / ".claude" / "skills" / "religion-council" / "SKILL.md"
+PORTABLE_SKILL = ROOT / "skills" / "worldwide-council" / "SKILL.md"
+CLAUDE_SKILL = ROOT / ".claude" / "skills" / "worldwide-council" / "SKILL.md"
 GENERATED_MODULE = ROOT / "orchestrator" / "generated_quote_policy.py"
 
 GENERATED_BY = (

@@ -10,7 +10,9 @@ sys.path.insert(0, str(ROOT / "orchestrator"))
 import claim_verification  # noqa: E402
 import render_finalizer  # noqa: E402
 from debate_controller import (  # noqa: E402
+    CodexMcpClient,
     ControllerError,
+    ControllerMcpServer,
     DebateController,
     sanitize_contrast_proposition,
     tool_definitions,
@@ -91,6 +93,187 @@ class DebateControllerTest(unittest.TestCase):
         pf.write_text(json.dumps(panelists), encoding="utf-8")
         with self.assertRaises(ControllerError):
             self.controller.load_panelists(str(pf))
+
+    # ---- cwd fence (the #53 sibling: the panelist working directory is moderator-supplied) ----
+
+    def _start(self, **overrides):
+        kwargs = dict(
+            question="Should the proposal proceed?",
+            panelists_file=str(self.panelists_file),
+            concurrency=10,
+            timeout_seconds=30,
+            retries=0,
+        )
+        kwargs.update(overrides)
+        return self.controller.start(**kwargs)
+
+    def _no_run_dir_was_created(self):
+        return not any((self.temp_path / "runs").glob("run-*"))
+
+    def test_cwd_absolute_outside_root_is_rejected_before_any_run_work(self):
+        # cwd is passed straight to every codex / codex-reply call as the sandbox working
+        # directory, so an absolute escape must be refused before a run dir or job exists.
+        with self.assertRaises(ControllerError) as ctx:
+            self._start(cwd="/etc")
+        self.assertIn("escapes project root", str(ctx.exception))
+        self.assertTrue(self._no_run_dir_was_created())
+
+    def test_cwd_parent_traversal_is_rejected(self):
+        with self.assertRaises(ControllerError) as ctx:
+            self._start(cwd="../../../../etc")
+        self.assertIn("escapes project root", str(ctx.exception))
+        self.assertTrue(self._no_run_dir_was_created())
+
+    def test_cwd_non_string_is_rejected(self):
+        with self.assertRaises(ControllerError):
+            self._start(cwd=123)
+        self.assertTrue(self._no_run_dir_was_created())
+
+    def test_cwd_inside_project_root_is_accepted_and_resolved(self):
+        # The fence must not break a legitimate relative working directory under project_root,
+        # and the persisted state carries the resolved path the panelist jobs will use.
+        workdir = self.temp_path / "panelist-work"
+        workdir.mkdir()
+        opening = self._start(cwd="panelist-work")
+        self.assertEqual(opening["status"], "complete")
+        state_path = self.temp_path / "runs" / opening["run_id"] / "state.json"
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+        self.assertEqual(state["cwd"], str(workdir.resolve()))
+
+    def test_cwd_escape_is_refused_on_the_mcp_tool_path(self):
+        # Same guarantee through the real dispatch surface: the tool call returns an isError
+        # result naming the fence, and no run dir is created.
+        server = ControllerMcpServer(self.controller)
+        response = server.handle(
+            {
+                "jsonrpc": "2.0",
+                "id": 7,
+                "method": "tools/call",
+                "params": {
+                    "name": "debate_start",
+                    "arguments": {
+                        "question": "Should the proposal proceed?",
+                        "panelists_file": str(self.panelists_file),
+                        "cwd": "/etc",
+                    },
+                },
+            }
+        )
+        self.assertTrue(response["result"]["isError"])
+        self.assertIn("escapes project root", response["result"]["content"][0]["text"])
+        self.assertTrue(self._no_run_dir_was_created())
+
+    # ---- codex preflight (a missing CLI is one readable error, not N panelist failures) ----
+
+    def test_missing_codex_binary_is_one_readable_error_before_any_run_work(self):
+        controller = DebateController(
+            project_root=self.temp_path,
+            state_dir=self.temp_path / "runs",
+            codex_command="definitely-missing-codex-binary-9f3e mcp-server",
+        )
+        try:
+            with self.assertRaises(ControllerError) as ctx:
+                controller.start(
+                    question="Should the proposal proceed?",
+                    panelists_file=str(self.panelists_file),
+                    concurrency=10,
+                    timeout_seconds=30,
+                    retries=0,
+                )
+        finally:
+            controller.close()
+        message = str(ctx.exception)
+        self.assertIn("Codex CLI not found", message)
+        self.assertIn("definitely-missing-codex-binary-9f3e", message)
+        self.assertIn("CODEX_COMMAND", message)
+        self.assertNotIn("Errno", message)  # not the raw FileNotFoundError
+        self.assertTrue(self._no_run_dir_was_created())
+
+    def test_missing_codex_binary_is_readable_on_the_mcp_tool_path(self):
+        controller = DebateController(
+            project_root=self.temp_path,
+            state_dir=self.temp_path / "runs",
+            codex_command="definitely-missing-codex-binary-9f3e mcp-server",
+        )
+        server = ControllerMcpServer(controller)
+        try:
+            response = server.handle(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 8,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "debate_start",
+                        "arguments": {
+                            "question": "Should the proposal proceed?",
+                            "panelists_file": str(self.panelists_file),
+                        },
+                    },
+                }
+            )
+        finally:
+            controller.close()
+        self.assertTrue(response["result"]["isError"])
+        self.assertIn("Codex CLI not found", response["result"]["content"][0]["text"])
+
+    def test_injected_client_skips_the_codex_preflight(self):
+        # An injected client (the offline strict example, fixtures) never spawns the CLI, so a missing
+        # or mis-pointed `codex` must not block it — this is what keeps the CI example green on a
+        # runner without Codex.
+        class InjectedClient:
+            def call_tool(self, name, arguments, timeout):
+                del timeout
+                if name == "codex":
+                    return {"thread_id": "injected-thread", "content": "opening statement"}
+                return {"thread_id": arguments["threadId"], "content": "reply"}
+
+            def close(self):
+                pass
+
+        controller = DebateController(
+            project_root=self.temp_path,
+            state_dir=self.temp_path / "runs",
+            codex_command="definitely-missing-codex-binary-9f3e mcp-server",
+        )
+        controller._client = InjectedClient()
+        try:
+            opening = controller.start(
+                question="Should the proposal proceed?",
+                panelists_file=str(self.panelists_file),
+                concurrency=10,
+                timeout_seconds=30,
+                retries=0,
+            )
+        finally:
+            controller.close()
+        self.assertEqual(opening["status"], "complete")
+
+    def test_cwd_must_be_an_existing_directory(self):
+        # A fenced-but-nonexistent cwd would bring back N identical panelist failures.
+        with self.assertRaises(ControllerError) as ctx:
+            self._start(cwd="does-not-exist")
+        self.assertIn("not an existing directory", str(ctx.exception))
+        self.assertTrue(self._no_run_dir_was_created())
+        (self.temp_path / "a-file").write_text("x", encoding="utf-8")
+        with self.assertRaises(ControllerError):
+            self._start(cwd="a-file")
+
+    def test_retry_refences_a_persisted_outside_cwd(self):
+        # Run state written before the fence (or edited on disk) must not resurrect an outside
+        # working directory through the retry path.
+        opening = self._start()
+        state_path = self.temp_path / "runs" / opening["run_id"] / "state.json"
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+        state["cwd"] = "/etc"
+        state_path.write_text(json.dumps(state), encoding="utf-8")
+        with self.assertRaises(ControllerError) as ctx:
+            self.controller.retry(opening["run_id"], timeout_seconds=30, retries=0)
+        self.assertIn("escapes project root", str(ctx.exception))
+
+    def test_empty_codex_command_is_a_readable_error(self):
+        with self.assertRaises(ControllerError) as ctx:
+            CodexMcpClient([], self.temp_path)
+        self.assertIn("Codex command is empty", str(ctx.exception))
 
     def test_reference_inside_project_root_is_read(self):
         # The fence must not break a legitimate reference that lives under project_root.

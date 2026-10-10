@@ -15,10 +15,10 @@ def load_retriever(path):
 class RetrieveTest(unittest.TestCase):
     def setUp(self):
         self.portable_path = (
-            ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py"
+            ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
         )
         self.claude_path = (
-            ROOT / ".claude" / "skills" / "religion-council" / "scripts" / "retrieve.py"
+            ROOT / ".claude" / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
         )
         self.module = load_retriever(self.portable_path)
 
@@ -135,10 +135,13 @@ class RetrieveTest(unittest.TestCase):
         rendering = next(
             r for r in records if r["work"] == "古蘭經" and r["locator"] == "51:56"
         )
-        self.assertEqual(rendering["representation_kind"], "published-translation")
+        # Replace-first rights policy (2026-09-28): a project-generated meaning-rendering of the
+        # Arabic, not a third-party published translation.
+        self.assertEqual(rendering["representation_kind"], "generated-rendering")
         self.assertEqual(rendering["rendering_mode"], "meaning-rendering")
-        self.assertEqual(rendering["provenance"]["translator"], "馬堅")
-        self.assertIn("copyright", rendering["rights"])
+        self.assertEqual(rendering["provenance"]["source_language"], "ar")
+        self.assertNotIn("translator", rendering["provenance"])
+        self.assertIn("not a published edition", rendering["rights"])
 
     def test_uncurated_records_have_no_presentation_fields(self):
         # A record with no sidecar entry stays untouched: an uncurated Buddhist source-bound summary

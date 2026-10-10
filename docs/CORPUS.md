@@ -15,7 +15,7 @@
 |---|---|---|
 | **Runtime snippets** | `references/<tradition>.md` | The hand-picked, cited quotations the personas actually speak from today (A0). |
 | **Corpus seed** | `01-基督宗教/ … 08-墨家/` | Per-tradition `典籍清單.md` (canon list + RAG version notes) and `思想概要.md` (thought summary) — planning material for the fuller corpus. |
-| **Retrieval seam** | `skills/religion-council/scripts/retrieve.py` | The stable contract between the corpus and the personas. |
+| **Retrieval seam** | `skills/worldwide-council/scripts/retrieve.py` | The stable contract between the corpus and the personas. |
 
 The eight traditions, and how they're classified:
 
@@ -174,7 +174,7 @@ cleared full redistribution stays in a restricted/private store.
 |---|---|---|
 | **執行期片段** | `references/<傳統>.md` | persona 今日實際引用的精選、附出處引文(A0)。 |
 | **語料種子** | `01-基督宗教/ … 08-墨家/` | 各傳統的 `典籍清單.md`(核心典籍+RAG 版本備註)與 `思想概要.md`(思想摘要)——擴充語料的規劃材料。 |
-| **檢索介面** | `skills/religion-council/scripts/retrieve.py` | 語料與 persona 之間的穩定契約。 |
+| **檢索介面** | `skills/worldwide-council/scripts/retrieve.py` | 語料與 persona 之間的穩定契約。 |
 
 八大傳統與分類:
 
@@ -209,7 +209,7 @@ persona 對語料的需求全部走同一個函式 `retrieve.retrieve(tradition,
 A0 階段會解析所選 `references/` 檔中的附出處條目,並作可重現的詞彙排序。括號內的出處備註
 只有在含明確、已登錄的教派標記時才會成為 `school`;所有解析條目均為有來源約束的 `[Text]`,
 再以附加欄位 `evidence_type` 與 `verbatim` 區分逐字引文和附出處摘要。核心檢索欄位保持穩定;
-只要未來階段守住它們,`SKILL.md` 與 36 個聲音都不必改。這正是整個
+只要未來階段守住它們,`SKILL.md` 與 37 個聲音都不必改。這正是整個
 [發展藍圖](../README.md#發展藍圖)的樞紐。
 
 ### 檢索 envelope 與 contract version

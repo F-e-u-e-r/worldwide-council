@@ -33,7 +33,7 @@ from evidence_snapshot import EvidenceStore, canonical_bytes  # noqa: E402
 
 CONTRACT_VERSION = "religion-council/retrieval/v1"
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
-PORTABLE_RETRIEVER = ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py"
+PORTABLE_RETRIEVER = ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
 
 
 def load_module_from_path(name, path):

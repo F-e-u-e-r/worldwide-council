@@ -1,0 +1,12 @@
+# Worldwide Council — Codex / OpenAI interface metadata.
+# Coverage is two honestly-distinguished layers:
+#   - 8 evidence-backed traditions: curated, cited, retriever-indexed corpus — the layer the
+#     hybrid strict mode verifies against.
+#   - additional interpretive personas (denominations, historical thinkers, an interpretive Judaism tradition, secular voices):
+#     argue from those traditions' texts under the same [Text]/[Interpretation] discipline, but
+#     have no separate indexed corpus and are not covered by strict verification.
+# The voices are not equally source-verified; this metadata does not present them as if they were.
+interface:
+  display_name: "Worldwide Council"
+  short_description: "Grounded multi-tradition philosophical dialogue"
+  default_prompt: "Use $worldwide-council to spawn one independent agent per selected tradition and run a sourced, moderated roundtable on the meaning of life."

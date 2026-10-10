@@ -35,3 +35,19 @@ jobs:
         run: python examples/strict-finalization/run_example.py
       - name: Run test suite
         run: python -m unittest discover -s tests -v
+
+  plugin-validate:
+    # The repository is also a Claude Code plugin (self-hosted marketplace): keep both manifests
+    # loadable. --strict fails on warnings (unknown fields, missing metadata, missing paths).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code@2.1.283  # pinned: the version validated locally
+      - name: Validate plugin manifest (strict)
+        run: claude plugin validate --strict .claude-plugin/plugin.json
+      - name: Validate marketplace manifest (strict)
+        run: claude plugin validate --strict .claude-plugin/marketplace.json

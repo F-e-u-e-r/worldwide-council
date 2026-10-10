@@ -1,0 +1,18 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "worldwide-council",
+  "owner": {
+    "name": "F-e-u-e-r",
+    "url": "https://github.com/F-e-u-e-r"
+  },
+  "metadata": {
+    "description": "Worldwide Council: the source-grounded multi-tradition roundtable skill, agents and MCP controller."
+  },
+  "plugins": [
+    {
+      "name": "worldwide-council",
+      "source": "./",
+      "description": "Worldwide Council: neutral moderator + 37 voices, with source-grounded retrieval for 8 evidence-backed traditions plus additional interpretive personas for broader comparison; [Text]/[Interpretation] tagging and an opt-in fail-closed strict mode (hybrid controller)."
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "mcpServers": {
-    "religion-council-controller": {
+    "worldwide-council-controller": {
       "type": "stdio",
-      "command": "bash",
+      "command": "${RC_PYTHON:-python3}",
       "args": [
-        "-lc",
-        "exec python3 \"$CLAUDE_PROJECT_DIR/orchestrator/debate_controller.py\" serve"
+        "-c",
+        "import os, sys; root = os.environ.get('WORLDWIDE_COUNCIL_PROJECT_DIR') or os.environ.get('RELIGION_COUNCIL_PROJECT_DIR') or os.environ.get('CLAUDE_PROJECT_DIR') or os.getcwd(); sys.path[0] = os.path.join(root, 'orchestrator'); sys.argv = ['debate_controller.py', 'serve']; import debate_controller; debate_controller.main()"
       ],
       "env": {}
     }

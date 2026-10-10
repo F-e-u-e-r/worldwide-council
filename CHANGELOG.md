@@ -12,10 +12,64 @@ The format is adapted from [Keep a Changelog](https://keepachangelog.com/); vers
 
 ## [Unreleased]
 
+### Changed
+- **Machine-identifier migration to Worldwide Council (brand-identity convergence; no release).**
+  The current runtime/brand identifiers are migrated to `worldwide-council`: plugin `name`,
+  marketplace `name` and entry, both skill trees (`skills/worldwide-council/`,
+  `.claude/skills/worldwide-council/`) with their `SKILL.md` `name:` and `$worldwide-council`
+  invocation, the MCP server key and tool prefix (`worldwide-council-controller`,
+  `mcp__worldwide-council-controller__…`), the agent namespace (`worldwide-council:council-…`,
+  derived automatically from the plugin `name`), and the local runtime state dir
+  (`.worldwide-council/runs`). **Intentionally preserved** (not renamed): the versioned protocol
+  IDs `religion-council/retrieval/v1` and `religion-council/claim/v1` (+ `-draft`) — brand migration
+  is not a protocol version bump; the external repo slug `F-e-u-e-r/religion-council` (GitHub rename
+  is a pending owner action); the natural-language safety trigger "do not start the religion
+  council"; the `religion-8.json` evidence-fixture filename; and all historical records. **Backward
+  compatibility:** the controller reads run state from `.religion-council/runs` as a read-only
+  fallback and still accepts `RELIGION_COUNCIL_PROJECT_DIR` as an alias (new
+  `WORLDWIDE_COUNCIL_PROJECT_DIR` takes precedence); no old state is moved. Migration gates with
+  known-bad arms added in `tests/test_identifier_migration.py`. Benchmark artifacts stay
+  byte-identical (no corpus/retrieval/benchmark semantic change). **T5a installed-copy acceptance
+  and T5b clean-machine portability require requalification** against the final identifier state
+  before release; public install docs keep the current working repo slug until the GitHub repository
+  is renamed, to avoid a broken intermediate install. No `VERSION` bump in this round.
+
 ### Added
-- Add a blank, blind retrieval-v1 human-judge template, rubric, offline validator, and tests so a
-  human relevance pass can be collected without exposing curator-1/model-judge labels or retrieval
-  scores.
+- **Coverage remediation — Judaism interpretive voice + ten-voice default council (pre-T4b breadth gaps).**
+  Adds `council-judaism`, a tradition-level **interpretive** voice (no indexed corpus, **not** in retrieval
+  `TRADITIONS`, not strict-verified), and promotes the existing `council-secular-humanist` into the default
+  council. A new default roster `orchestrator/panelists/worldwide-10.json` = the eight evidence-backed
+  traditions + secular humanism + Judaism; `religion-8.json` stays the eight-evidence roster. The roster is
+  now **37 voices / 38 agents including the moderator** (was 36 / 37). **Evidence-backed traditions remain
+  exactly 8** — `TRADITIONS`, the curated corpus, and the retrieval-v1 benchmark inputs are unchanged, so
+  there is no retrieval/corpus/benchmark semantic change and the committed benchmark reports stay
+  byte-identical. Also corrects factual errors in the October 2026 Worldwide Council coverage review (Pew
+  2020 world-religion shares; `religiously unaffiliated` ≠ secular humanism; the Judaism rationale; Sefaria
+  per-version licensing; the Sikhism ranking) and reframes the verdict as *curated, non-exhaustive*. Because
+  the package/runtime roster changed, the prior **T5a installed-copy acceptance (collected on the 37-agent
+  tree) requires requalification before release** (see `docs/release/v0.14-installed-copy-acceptance.md`).
+  No `VERSION` bump in this round.
+- **Claude Code plugin + self-hosted marketplace manifests.** `.claude-plugin/plugin.json`
+  (name `worldwide-council` (migrated — see "Machine-identifier migration" below), display name Worldwide Council, the 38 `council-*` agents
+  declared explicitly (including `council-judaism`) — the manifest's `agents` key takes files, not directories — the portable
+  `skills/worldwide-council` picked up by the default `skills/` scan, `license: MIT AND CC-BY-4.0`
+  because the plugin ships CC BY content, and the hybrid controller as an inline MCP server launched
+  from `${CLAUDE_PLUGIN_ROOT}` with `--state-dir ${CLAUDE_PLUGIN_DATA}/runs`, so run state survives
+  plugin updates and never lands inside the plugin root), plus `.claude-plugin/marketplace.json`
+  (`worldwide-council`, one entry with `source: "./"`), so a user can
+  `claude plugin marketplace add F-e-u-e-r/religion-council` (repo slug unchanged until the external
+  GitHub rename) and `claude plugin install worldwide-council@worldwide-council` instead of cloning and copying
+  folders. The same `plugin.json` + `skills/<name>/SKILL.md` layout is what the OpenAI Plugins
+  Directory's Claude-compatible skills-only submission path reads (it does not rely on
+  `marketplace.json` / `.mcp.json`). CI gains a `plugin-validate` job running
+  `claude plugin validate --strict` on both manifests with a pinned CLI version, and
+  `tests/test_repository.py` pins the manifest to the repository (version = `VERSION`, every agent
+  path exists, roster = 38, skill dir present, controller launched from the plugin root with a
+  data-dir state dir, marketplace entry = plugin name). Known limitation, not yet addressed: the
+  moderator and voice agents read repo-relative paths (`.claude/skills/worldwide-council/SKILL.md`,
+  the `01–08` folders), which only resolve when Claude Code runs in this repository; a
+  plugin-installed copy needs those references rewritten (`${CLAUDE_PLUGIN_ROOT}` substitutes in
+  agent bodies) — tracked for the README / launch-copy pass.
 - **ADR 0008 Phase 1 — textual-witness / canon sidecar schema (metadata only).** Extends the A1
   `presentation.json` sidecar with corpus-versioning fields (`witness_kind`, `canon_scope`,
   `textual_witness`, `commentarial_lineage`, `corpus_family`) governed by a new, **separate**
@@ -140,6 +194,57 @@ The format is adapted from [Keep a Changelog](https://keepachangelog.com/); vers
   report-counted metadata. Both `presentation.json` copies stay byte-identical.
 
 ### Fixed
+- **Installed-copy runtime paths for the 37 agents (T5 release gate).** As a plugin installed from a
+  marketplace, the agents run from a cached copy in a working directory unrelated to this
+  repository, where their repo-relative reads (`.claude/skills/religion-council/SKILL.md`, bare
+  `references/…`) resolved against the session cwd and failed. Every resource path in
+  `.claude/agents/council-*.md` is now written as `${CLAUDE_PLUGIN_ROOT}/…` (Claude Code
+  substitutes it in plugin mode) with a path note for project mode (drop the prefix, resolve from
+  the repo root); the moderator prepends `資源根目錄: <absolute root>` to each member prompt and
+  dispatches members by their namespaced name (`religion-council:council-…`) in plugin mode,
+  because a bare-name dispatch hands the member the unsubstituted variable. Verified end to end
+  from an unrelated directory against a copied install served from a scratch git marketplace:
+  all reads land in the plugins cache, none in the development checkout, the controller MCP server
+  starts from the copy with its state under `${CLAUDE_PLUGIN_DATA}`, and an unresolvable path is
+  reported, never guessed. Procedure and run record: `docs/release/v0.14-installed-copy-acceptance.md`.
+  Two harness facts recorded there: `claude plugin details` shows `Agents (0)` for manifest-declared
+  agents outside `agents/` although they load; and a machine with
+  `permissions.blockReadsOutsideWorkingDirectories: true` needs `--add-dir <plugin cache root>`.
+  A repository test now pins the path convention in every agent body.
+- **`debate_start.cwd` fenced to the project root (the #53 sibling).** The moderator-supplied
+  `cwd` was resolved and written into run state, then passed straight through as the working
+  directory of every `codex` / `codex-reply` call — the same prompt-injection-led shape #53 closed
+  for `panelists_file` / `reference`, minus the fence. `_resolve_run_cwd` now applies
+  `_assert_within_project_root` (omitted / empty = the project root; absolute-outside, `..`
+  traversal, non-string values and non-existent / non-directory paths are refused **before** any
+  run dir, snapshot or panelist job exists), on both the direct `start()` and the real MCP tool
+  path, and `retry()` re-fences the persisted `cwd` so run state predating the fence cannot
+  resurrect an outside directory; the schema type is unchanged.
+- **A missing Codex CLI is one readable error, not N identical panelist failures.** `codex` was
+  only discovered inside a per-job `subprocess.Popen`, so a missing or mis-pointed binary surfaced
+  as the raw `[Errno 2] No such file or directory: 'codex'` captured by `_call_with_retries` and
+  returned as a "failed" round. `preflight_codex_command` (`shutil.which` on the command's
+  executable, resolved against the project root for a relative path with a separator exactly as
+  `Popen` will; an empty `CODEX_COMMAND` is its own error) now runs at the top of `start()` — only
+  when the controller will actually spawn the CLI, so an injected offline client (the strict
+  example in CI, fixtures) is exempt — and again in `CodexMcpClient` (defense in depth), naming the
+  executable and pointing at `codex login` / `CODEX_COMMAND`. Routing-only: no authentication or
+  version check is claimed; a wrapper executable (`env … codex`) is a documented gap. Found in
+  independent review before merge: an unconditional preflight had turned CI red — the offline strict
+  example injects a fake client on a runner without Codex — so the dependency boundary is explicit:
+  only the real subprocess path is preflighted, and a test pins the injected-client exemption.
+- **`.mcp.json` no longer needs `bash`.** The project MCP entry used
+  `bash -lc "exec python3 \"$CLAUDE_PROJECT_DIR/…\" serve"`, which cannot start on Windows without a
+  POSIX shell and re-quoted the path through a login shell. It now launches the interpreter directly
+  (`${RC_PYTHON:-python3}` — documented `.mcp.json` variable expansion, so `RC_PYTHON=python` works
+  where `python3` is not on PATH; documented in INSTALL.md) with a one-line Python bootstrap that
+  resolves the project root from `CLAUDE_PROJECT_DIR` — the variable Claude Code documents as set in
+  the spawned server's environment "so your server can resolve project-relative paths without
+  depending on the working directory" — or the controller's own `RELIGION_COUNCIL_PROJECT_DIR`,
+  falling back to the current directory; it replaces `sys.path[0]` (the cwd is not on the import
+  path) and lets `main()` resolve the root itself. Verified by execution from a foreign cwd (env var
+  set), from the repo root (no env var), and the neither case fails loudly with
+  `ModuleNotFoundError` instead of starting against the wrong tree.
 - **Christianity provenance `source_language` corrected to `grc` (Koine Greek).** The two 和合本 NT
   records (`約翰福音 1:1`, `希伯來書 11:1`) carried `"el, he"` — the modern-Greek ISO code plus a
   whole-edition Hebrew leak (an NT excerpt's source is not Hebrew). Cross-model review finding
@@ -154,6 +259,48 @@ The format is adapted from [Keep a Changelog](https://keepachangelog.com/); vers
   behavior. No scoring, metric, or report change.
 
 ### Changed
+- **Rights remediation, replace-first: no third-party translation believed to be in copyright, and
+  no rendering of unverified provenance, remains in the bundled corpus.** Owner decision
+  (2026-09-27/28): public-domain or openly licensed replacement > justified minimal quotation > keep.
+  Replaced **in place — same line, same `(work, locator)`** — by the project's **own generated
+  meaning-renderings** (`representation_kind: generated-rendering`, `rendering_mode:
+  meaning-rendering`, provenance naming the public-domain source language and the method: rendered
+  clause by clause from the source text, no Chinese translation consulted): the five indexed
+  《古蘭經》records (51:56 · 112:1-4 · 2:156 · 1:1 · 2:256, formerly 馬堅 1981 wording) and the
+  《布哈里聖訓實錄》opening ḥadīth (`source_language: ar`); 《法句經》1 (formerly a 1950s translation;
+  `source_language: pi`, `canon_scope: theravada`, `corpus_family: pali_canon`); and the four
+  indexed Sanskrit excerpts of unverified provenance —《薄伽梵歌》2:47 · 2:20,《歌者奧義書》6.8.7,
+  《廣林奧義書》1.3.28 (`source_language: sa`) — plus the same wordings in the persona files
+  (伊斯蘭核心人物 33:40 · 51:56 · ḥadīth, 伊斯蘭教派 ḥadīth, 印度教核心人物 2:47 · 4:7-8 · 18:66,
+  基督宗教核心人物 Augustine《懺悔錄》I.1 from the Latin), each marked 本專案自…釋義. The Catholic
+  voice's思高本 (1968)《瑪竇福音》16:18 becomes the public-domain 和合本 (1919) wording, cited as
+  《馬太福音》16:18 with the Catholic book/name noted (a persona bullet, not indexed, so this is the
+  one `work` string that changed). The five remaining 和合本 bullets (創世記 1:1 · 傳道書 1:2 ·
+  約翰福音 3:16 · 馬太福音 22:37-39 · 彌迦書 6:8) are now curated as `published-translation` /
+  1919 / `public-domain-by-publication-date` like the two already curated, and 約翰福音 3:16 is
+  corrected to the 1919 reading 不至 (was 不致). Consequences, measured: source lines, retrieval-v1
+  relevance judgments and the frozen blind-judge pool (keyed by work + locator, no text) are
+  untouched; **occurrence ids of the rewritten records change** (the corpus-stable id hashes the
+  text, ADR 0005); every committed retrieval-v1 report is regenerated in dependency order with
+  `--baseline-json` — all ranking, exact-span and no-answer summaries and every per-query rank are
+  **identical** to the committed values, and only the metadata counts move
+  (`representation_metadata_records` 12 → 23 lexical / 13 → 23 BM25, `rights_metadata_records`
+  13 → 24 / 16 → 27). For transparency: an intermediate, more verbose draft of the renderings had
+  moved q007 (the paraphrased Golden Rule) under BM25; the final terse register, chosen to match the
+  corpus, restored the original ranks — no wording was tuned against the benchmark. Evidence
+  classification (owner, 2026-09-28): The benchmark remains the regression suite for the frozen retrieval contract, but this remediation cycle observed benchmark output before finalizing replacement wording; therefore the post-remediation result is not treated as independent holdout evidence. Found in independent review before
+  merge: the first regeneration omitted `--baseline-json` and dependency ordering, silently dropping
+  the Markdown comparison sections — the canonical procedure now lives in
+  `docs/benchmarks/retrieval-v1.md`, the test hints, and a Markdown-section gate. Docs: sidecar
+  `_note`, README licence sections, LICENSE-CONTENT, DISCLAIMER / CONTRIBUTING label examples, the
+  Chinese SKILL.md, `council-catholic.md`, both 教派 footers, and the 典籍清單 bibliography notes no
+  longer point at in-copyright editions. New curation gates (tests/test_corpus_curation.py): every
+  `published-translation` must be a public-domain edition (`basis:
+  public-domain-by-publication-date`, year < 1930); no rights note may call a bundled excerpt
+  "in copyright" / "受版權保護"; every `generated-rendering` names a non-Chinese public-domain
+  source; every verbatim record of the christianity / islam / hinduism traditions must be curated
+  (the replaced excerpts had come in uncurated); and the removed wordings are denylisted across both
+  reference trees. Both `presentation.json` copies stay byte-identical.
 - **Display name rebranded to "Worldview Council" (identifiers unchanged).** Every user-facing
   display surface — README (title, tagline, attribution line), INSTALL, DISCLAIMER, both `SKILL.md`
   descriptions/titles (now also naming secular humanism and J. S. Mill and the 世界觀議會 trigger),
@@ -167,6 +314,25 @@ The format is adapted from [Keep a Changelog](https://keepachangelog.com/); vers
 - Deferred follow-up: rename the older controller `renderer-bypass` boundary reason to
   `verification-artifact-missing`. The reason-code string may be a public contract, so this needs a
   deprecation window.
+
+### Changed
+- **Canonical product/display name renamed from "Worldview Council" to "Worldwide Council."** The
+  canonical product/display identity is renamed across current documentation and public-facing
+  display metadata only — README (title, tagline, "formerly" note, attribution line), INSTALL,
+  DISCLAIMER, both `SKILL.md` display titles, `LICENSE` / `LICENSE-CONTENT` attribution,
+  `.claude-plugin/plugin.json` (`displayName`, author name), `.claude-plugin/marketplace.json`
+  entry descriptions, and `agents/openai.yaml` `display_name`. Product lineage: originally
+  **Religion Council**, then **Worldview Council** (see the rebrand note above), now **Worldwide
+  Council** (October 2026). All machine identifiers deliberately stay unchanged for compatibility:
+  the repo slug and plugin `name` `religion-council`, the marketplace `name` `worldview-council`,
+  the skill directory, the MCP server/tool names `religion-council-controller`, the agent
+  namespace, policy/occurrence ids, and the `religion-8` roster filename. Historical records keep
+  their period names as written — CHANGELOG history, ADRs, committed benchmark reports, review
+  records, and the frozen `product-review-2026-09-27.md`. A separate runtime/identifier migration,
+  with its own acceptance pass, is required before any of those identifiers change, because
+  renaming them can invalidate installed-copy / T5 evidence. `tests/test_repository.py` gains a
+  field-scoped rename audit (current display surfaces say "Worldwide Council"; it is not a
+  repo-wide denylist, so historical names and trigger aliases stay allowed).
 
 ## [v0.13.1] — 2026-07-01 · Retrieval-v1 κ Guardrail
 

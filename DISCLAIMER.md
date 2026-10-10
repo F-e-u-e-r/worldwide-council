@@ -8,14 +8,19 @@
 
 ### What this project is — and is not
 
-Worldview Council stages a **reconstructed, source-grounded dialogue** for study, comparison,
+Worldwide Council stages a **reconstructed, source-grounded dialogue** for study, comparison,
 and reflection. It is **not**:
 
 - a religious authority, a substitute for scripture, clergy, or a teacher within any tradition;
 - a claim to *channel* or speak *as* any prophet, deity, saint, founder, or deceased thinker —
   every "voice" is an explicitly reconstructed position based on attributed texts and scholarship;
 - a verdict on which tradition is "true" or "best." The moderator does not declare a winner
-  unless you supply an explicit evaluation criterion.
+  unless you supply an explicit evaluation criterion;
+- a corpus in which all voices are equally source-verified. The eight broad traditions have a
+  curated, cited, retriever-indexed corpus (the layer the hybrid strict mode verifies against);
+  the denomination, thinker, interpretive-tradition (Judaism), and secular voices are additional interpretive personas that argue
+  from those traditions' texts under the same labeling discipline but have no separate indexed
+  corpus and are not covered by strict verification.
 
 ### Sourcing rules (the heart of the project)
 
@@ -32,7 +37,7 @@ Every contribution and every generated turn must follow these:
    admissible supplied source entry and locator. Model memory or a claim that a source was
    consulted is never sufficient.
 4. **The Qur'an in Chinese (or any non-Arabic) is a *rendering of meaning*,** not the original;
-   it must be labeled as such (e.g. 馬堅譯). Do not present a generated translation as a
+   it must be labeled as such (the project's own 釋義, or a named public-domain translation). Do not present a generated translation as a
    published quotation.
 5. **Don't let one tradition define another.** Restate a position in terms its own adherents
    would recognize before criticizing it.
@@ -80,7 +85,8 @@ licensed source material may be added to this repository. See the license scope 
 - 任何宗教權威,也不能取代經典、神職人員或某傳統內的師長;
 - 「附身」或「以某人身分發言」——絕不宣稱代言任何先知、神祇、聖徒、創教者或已故思想家;每個
   「聲音」都是依據可考文本與學術研究、明確標示的**重建立場**;
-- 對「哪個傳統為真/最好」的裁決。除非你給出明確評判標準,主持人不宣布勝負。
+- 對「哪個傳統為真/最好」的裁決。除非你給出明確評判標準,主持人不宣布勝負;
+- 一份「所有聲音都同等 source-verified」的語料。八個廣義傳統有精選、附出處且可被檢索器索引的語料(也是 hybrid strict 模式據以核對的對象);教派、人物、詮釋性傳統(猶太教)與世俗聲音則是 additional interpretive personas,以相同標記紀律、從這些傳統的文本立論,但沒有各自獨立的可索引語料,亦不在 strict 驗證涵蓋範圍。
 
 ### 來源守則(本專案的核心價值)
 
@@ -92,7 +98,7 @@ licensed source material may be added to this repository. See the license scope 
    否則移除該附出處主張,或只以不構成支持的〔未驗證引用〕保留。
 3. **只引用有文件繫定的文句。** 引文必須透過可採的已提供來源條目,確定地繫於文件與定位;
    模型記憶或聲稱曾查閱某來源永不足夠。
-4. **《古蘭經》中文(或任何非阿拉伯文)為「釋義」**,非原文,須明確標示(如馬堅譯);不可把
+4. **《古蘭經》中文(或任何非阿拉伯文)為「釋義」**,非原文,須明確標示(本專案釋義,或註明所用公有領域譯本);不可把
    生成的翻譯當成已出版引文呈現。
 5. **不替別的傳統下定義。** 批評前先以對方信徒能認可的語彙複述其立場。
 6. **嚴禁斷章取義。** 保留足夠脈絡,避免把一段話扭去支持無關結論;區分「主流說法」與「某派/

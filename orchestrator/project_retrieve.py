@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
-_PORTABLE_RETRIEVER = _ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py"
+_PORTABLE_RETRIEVER = _ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
 
 RETRIEVER_KIND = "project-file"
 
@@ -129,7 +129,7 @@ def capabilities():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Worldview Council project retriever")
+    parser = argparse.ArgumentParser(description="Worldwide Council project retriever")
     parser.add_argument("--tradition", choices=sorted(TRADITIONS))
     parser.add_argument("--query")
     parser.add_argument("--k", type=int, default=5)

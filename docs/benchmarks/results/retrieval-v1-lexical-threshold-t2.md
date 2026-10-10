@@ -31,7 +31,7 @@
 - Required envelope fields present: **True**
 - Deterministic repeat (identical ranking on a second pass): **True**
 - source_assurance artifact-backed: 37/37 retrieved records
-- Curated metadata among retrieved records: representation_kind=12, rights=13
+- Curated metadata among retrieved records: representation_kind=23, rights=24
 - **Citation fidelity** (returned+relevant records with a reproducible occurrence id across two runs and a reordering): **1.000** (19/19 records)
 - Span assurance at retrieval: tier_at_retrieval=`None`, source_assurance floor=`artifact-backed` (37/37 records), edition-backed-span-verified=**False**
 - _retrieval mints no span-assurance tier; curated-snapshot-span-verified is minted at B2 and edition-backed-span-verified is reserved for A2 — beating this benchmark upgrades neither (docs/benchmarks/retrieval-v1.md hard constraint 6)._
@@ -47,7 +47,7 @@
 ## Operational (snapshot — machine-specific, not part of the reproducible metrics)
 
 - records searched per query: 56
-- total: 0.0225s · avg query: 1.2486 ms · max query: 1.8138 ms
+- total: 0.0236s · avg query: 1.3091 ms · max query: 2.0569 ms
 
 ## Per-query results
 
@@ -60,7 +60,7 @@
 | q005 | exact_locator | 1 | 1.000 | hit | 約翰福音·3:16 (score 23) |
 | q006 | exact_locator | 1 | 1.000 | hit | 古蘭經·1:1(開端章) (score 15) |
 | q007 | paraphrased | 2 | 1.000 | hit | 彌迦書·6:8 (score 4) |
-| q008 | paraphrased | 1 | 1.000 | hit | 薄伽梵歌·2:47 (score 15) |
+| q008 | paraphrased | 1 | 1.000 | hit | 薄伽梵歌·2:47 (score 13) |
 | q009 | paraphrased | 1 | 1.000 | hit | 彌迦書·6:8 (score 12) |
 | q010 | cross_tradition | 1 | 0.250 | hit | 廣林奧義書·1.3.28 (score 4) |
 | q011 | cross_tradition | 1 | 1.000 | hit | 馬太福音·22:37-39 (score 14) |

@@ -20,9 +20,14 @@ curation, arrangement, summaries, framing, and any translations or renderings
 of meaning. It does not, and cannot, grant rights over third-party modern
 translations or editions that remain under their own copyright — contributors
 must only add public-domain or openly licensed source material (see
-CONTRIBUTING.md and DISCLAIMER.md).
+CONTRIBUTING.md and DISCLAIMER.md). Currently no such third-party material is
+bundled: the Bible excerpts are the public-domain 和合本 (1919); the Qur'an,
+Pali and Sanskrit excerpts are this project's own generated meaning-renderings
+(marked "generated-rendering" in references/presentation.json); the classical
+Chinese texts are public domain by age. Any material NOT subject to this
+license must be marked in that sidecar's per-record "rights" field.
 
-ATTRIBUTION — Credit "Worldview Council (formerly Religion Council) contributors"
+ATTRIBUTION — Credit "Worldwide Council (formerly Religion Council, later Worldview Council) contributors"
 with a link back to the project repository.
 
 The complete CC BY 4.0 legal code follows.

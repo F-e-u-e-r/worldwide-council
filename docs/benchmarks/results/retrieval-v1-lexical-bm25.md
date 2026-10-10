@@ -31,7 +31,7 @@
 - Required envelope fields present: **True**
 - Deterministic repeat (identical ranking on a second pass): **True**
 - source_assurance artifact-backed: 38/38 retrieved records
-- Curated metadata among retrieved records: representation_kind=13, rights=16
+- Curated metadata among retrieved records: representation_kind=23, rights=27
 - **Citation fidelity** (returned+relevant records with a reproducible occurrence id across two runs and a reordering): **1.000** (19/19 records)
 - Span assurance at retrieval: tier_at_retrieval=`None`, source_assurance floor=`artifact-backed` (38/38 records), edition-backed-span-verified=**False**
 - _retrieval mints no span-assurance tier; curated-snapshot-span-verified is minted at B2 and edition-backed-span-verified is reserved for A2 — beating this benchmark upgrades neither (docs/benchmarks/retrieval-v1.md hard constraint 6)._
@@ -47,30 +47,30 @@
 ## Operational (snapshot — machine-specific, not part of the reproducible metrics)
 
 - records searched per query: 56
-- total: 0.0177s · avg query: 0.9860 ms · max query: 1.4079 ms
+- total: 0.0179s · avg query: 0.9970 ms · max query: 1.4640 ms
 
 ## Per-query results
 
 | query_id | category | first relevant rank | recall@5 | outcome | top-1 retrieved |
 |---|---|---|---|---|---|
-| q001 | exact_quote | 1 | 1.000 | hit | 論語·顏淵·reference file entry (score 48.992896) |
-| q002 | exact_quote | 1 | 1.000 | hit | 道德經·8 (score 32.216944) |
-| q003 | exact_quote | 1 | 1.000 | hit | 般若波羅蜜多心經·reference file entry (score 25.727914) |
-| q004 | exact_locator | 1 | 1.000 | hit | 道德經·48 (score 38.456529) |
-| q005 | exact_locator | 1 | 1.000 | hit | 約翰福音·3:16 (score 21.572816) |
-| q006 | exact_locator | 1 | 1.000 | hit | 古蘭經·1:1(開端章) (score 29.912382) |
-| q007 | paraphrased | 2 | 1.000 | hit | 馬太福音·22:37-39 (score 7.849678) |
-| q008 | paraphrased | 1 | 1.000 | hit | 薄伽梵歌·2:47 (score 31.790297) |
-| q009 | paraphrased | 1 | 1.000 | hit | 彌迦書·6:8 (score 19.693994) |
-| q010 | cross_tradition | 1 | 0.250 | hit | 廣林奧義書·1.3.28 (score 8.412802) |
-| q011 | cross_tradition | 1 | 1.000 | hit | 馬太福音·22:37-39 (score 8.321731) |
-| q012 | cross_lingual | 1 | 1.000 | hit | 歌者奧義書·6.8.7 (score 12.321807) |
-| q013 | cross_lingual | 1 | 1.000 | hit | 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 13.753182) |
-| q014 | no_answer | — | — | false_support | 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 3.177883) |
-| q015 | no_answer | — | — | false_support | 廣林奧義書·1.4.10 (score 4.066262) |
-| q016 | ambiguous | 1 | 0.750 | hit | 道德經·1 (score 2.366786) |
-| q017 | duplicate_near_duplicate | 1 | 1.000 | hit | 道德經·25 (score 25.663114) |
-| q018 | duplicate_near_duplicate | 1 | 1.000 | hit | 法句經·1(南傳) (score 13.41893) |
+| q001 | exact_quote | 1 | 1.000 | hit | 論語·顏淵·reference file entry (score 49.174666) |
+| q002 | exact_quote | 1 | 1.000 | hit | 道德經·8 (score 32.374207) |
+| q003 | exact_quote | 1 | 1.000 | hit | 般若波羅蜜多心經·reference file entry (score 25.871405) |
+| q004 | exact_locator | 1 | 1.000 | hit | 道德經·48 (score 38.740587) |
+| q005 | exact_locator | 1 | 1.000 | hit | 約翰福音·3:16 (score 21.808849) |
+| q006 | exact_locator | 1 | 1.000 | hit | 古蘭經·1:1(開端章) (score 30.139463) |
+| q007 | paraphrased | 2 | 1.000 | hit | 馬太福音·22:37-39 (score 8.242577) |
+| q008 | paraphrased | 1 | 1.000 | hit | 薄伽梵歌·2:47 (score 28.774147) |
+| q009 | paraphrased | 1 | 1.000 | hit | 彌迦書·6:8 (score 19.920064) |
+| q010 | cross_tradition | 1 | 0.250 | hit | 廣林奧義書·1.3.28 (score 8.740908) |
+| q011 | cross_tradition | 1 | 1.000 | hit | 馬太福音·22:37-39 (score 8.38979) |
+| q012 | cross_lingual | 1 | 1.000 | hit | 歌者奧義書·6.8.7 (score 12.405385) |
+| q013 | cross_lingual | 1 | 1.000 | hit | 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 13.819051) |
+| q014 | no_answer | — | — | false_support | 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 3.160513) |
+| q015 | no_answer | — | — | false_support | 廣林奧義書·1.4.10 (score 4.094399) |
+| q016 | ambiguous | 1 | 0.750 | hit | 道德經·1 (score 2.371346) |
+| q017 | duplicate_near_duplicate | 1 | 1.000 | hit | 道德經·25 (score 25.808996) |
+| q018 | duplicate_near_duplicate | 1 | 1.000 | hit | 法句經·1(南傳) (score 12.478534) |
 
 ## Failure analysis
 
@@ -80,8 +80,8 @@
 - `q010` (cross_tradition): '人應該如何面對死亡' — recall@5 = 0.250; the thematic/relevant records beyond the top hit were not retrieved.
 
 **False support (no-answer query surfaced a lexical match):**
-- `q014`: '區塊鏈與加密貨幣的投資策略' surfaced 布哈里聖訓實錄·開卷傳述(附傳述鏈) at score 3.177883 — a spurious lexical overlap, not support.
-- `q015`: '最新智慧型手機的硬體規格比較' surfaced 廣林奧義書·1.4.10 at score 4.066262 — a spurious lexical overlap, not support.
+- `q014`: '區塊鏈與加密貨幣的投資策略' surfaced 布哈里聖訓實錄·開卷傳述(附傳述鏈) at score 3.160513 — a spurious lexical overlap, not support.
+- `q015`: '最新智慧型手機的硬體規格比較' surfaced 廣林奧義書·1.4.10 at score 4.094399 — a spurious lexical overlap, not support.
 
 ## Interpretation
 
@@ -149,8 +149,8 @@ The threshold candidates are not backend selections; they are reference experime
 | exact locator: John 3:16 (`q005`) | hit; rank 1; recall@5 1.000 | hit; rank 1; recall@5 1.000 | hit; rank 1; recall@5 1.000 |
 | paraphrase: do not impose on others (`q007`) | hit; rank 2; recall@5 1.000 | hit; rank 2; recall@5 1.000 | hit; rank 2; recall@5 1.000 |
 | broad cross-tradition: facing death (`q010`) | hit; rank 1; recall@5 0.250 | hit; rank 1; recall@5 0.250 | hit; rank 1; recall@5 0.250 |
-| no-answer: crypto investment (`q014`) | no_answer_ok; top-1 — | no_answer_ok; top-1 — | false_support; top-1 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 3.177883) |
-| no-answer: smartphone specs (`q015`) | no_answer_ok; top-1 — | no_answer_ok; top-1 — | false_support; top-1 廣林奧義書·1.4.10 (score 4.066262) |
+| no-answer: crypto investment (`q014`) | no_answer_ok; top-1 — | no_answer_ok; top-1 — | false_support; top-1 布哈里聖訓實錄·開卷傳述(附傳述鏈) (score 3.160513) |
+| no-answer: smartphone specs (`q015`) | no_answer_ok; top-1 — | no_answer_ok; top-1 — | false_support; top-1 廣林奧義書·1.4.10 (score 4.094399) |
 
 ### Takeaway
 

@@ -19,9 +19,9 @@
       "occ/v1-corpus-stable": 36
     },
     "records_evaluated": 36,
-    "representation_metadata_records": 12,
+    "representation_metadata_records": 23,
     "required_envelope_fields_present": true,
-    "rights_metadata_records": 13,
+    "rights_metadata_records": 24,
     "source_assurance_artifact_backed_count": 36,
     "span_assurance": {
       "all_records_artifact_backed": true,
@@ -502,7 +502,7 @@
       "ndcg_at_5": 1.0,
       "no_answer": false,
       "outcome": "hit",
-      "pre_threshold_top_score": 15,
+      "pre_threshold_top_score": 13,
       "precision_at_1": 1.0,
       "precision_at_3": 0.6666666666666666,
       "precision_at_5": 0.4,
@@ -517,7 +517,7 @@
           "locator": "2:47",
           "rank": 1,
           "relevance": 2,
-          "score": 15,
+          "score": 13,
           "tradition": "hinduism",
           "work": "薄伽梵歌"
         },
@@ -801,16 +801,8 @@
           "work": "布哈里聖訓實錄"
         },
         {
-          "locator": "1(南傳)",
-          "rank": 2,
-          "relevance": 0,
-          "score": 1,
-          "tradition": "buddhism",
-          "work": "法句經"
-        },
-        {
           "locator": "1:1",
-          "rank": 3,
+          "rank": 2,
           "relevance": 0,
           "score": 1,
           "tradition": "christianity",
@@ -818,7 +810,7 @@
         },
         {
           "locator": "1:2",
-          "rank": 4,
+          "rank": 3,
           "relevance": 0,
           "score": 1,
           "tradition": "christianity",
@@ -826,11 +818,19 @@
         },
         {
           "locator": "(引商鞅之意)",
-          "rank": 5,
+          "rank": 4,
           "relevance": 0,
           "score": 1,
           "tradition": "legalism",
           "work": "商君書·更法"
+        },
+        {
+          "locator": "22:37-39",
+          "rank": 5,
+          "relevance": 0,
+          "score": 1,
+          "tradition": "christianity",
+          "work": "馬太福音"
         }
       ],
       "threshold_filtered": false

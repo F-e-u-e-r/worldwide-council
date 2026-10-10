@@ -1,4 +1,4 @@
-# Worldview Council · 多傳統哲學議會
+# Worldwide Council · 多傳統哲學議會
 
 > A source-grounded, moderated roundtable across religious, philosophical, and
 > ethical worldviews — a drop-in skill for AI coding agents.
@@ -13,13 +13,19 @@
 
 **English** · [繁體中文](#繁體中文)
 
-_Formerly “Religion Council.” The repo, skill, and MCP identifiers stay `religion-council` for compatibility._
+_Originally “Religion Council”; renamed “Worldview Council” as it broadened beyond religion, and now **Worldwide Council** (canonical since October 2026). The repo, skill, and MCP identifiers stay `religion-council` for compatibility._
+
+**Who it's for.** Developers running Claude Code, Codex, or any MCP-capable agent, plus educators and inter-faith readers who want a sourced, multi-tradition debate rather than a single blended voice.
+
+**Install (Claude Code).** `claude plugin marketplace add F-e-u-e-r/religion-council` then `claude plugin install worldwide-council@worldwide-council`. Codex and other agents: see [INSTALL.md](INSTALL.md).
+
+**See a real run first.** A Claude-only council on *"does life have meaning?"* — [showcase transcript](docs/showcase/2026-09-28-claude-only-meaning-of-life.md). This is the instruction-enforced tier (quotations mechanically re-checked at curation time), **not** strict mode.
 
 ---
 
 ## What is this?
 
-**Worldview Council** turns your AI agent into a neutral **moderator** that convenes a
+**Worldwide Council** turns your AI agent into a neutral **moderator** that convenes a
 fair, **source-grounded** dialogue among religious, philosophical, and ethical
 worldviews — without flattening them into one mushy consensus.
 
@@ -30,7 +36,7 @@ genuine tensions instead of forcing agreement.
 
 It runs in three execution modes:
 
-1. **Claude Code only** — 37 specialized Claude agents (1 moderator + 36 voices).
+1. **Claude Code only** — 38 specialized Claude agents: 1 moderator + 37 voices (8 evidence-backed traditions + 29 interpretive personas; see [Coverage](#coverage)).
 2. **Codex only** — a portable Codex skill, with native Codex subagents when requested.
 3. **Claude moderator + Codex panelists** — a deterministic Python MCP controller manages
    persistent Codex threads, barriers, retries, and audit records.
@@ -73,12 +79,15 @@ The release-by-release history lives in [CHANGELOG.md](CHANGELOG.md).
 
 ## Coverage
 
+**Two layers, honestly distinguished.** The **eight traditions** below are the *evidence-backed* layer: each has a curated, cited corpus that the retriever indexes and that strict mode verifies against. The **denomination, thinker, and non-religious voices** are *additional interpretive personas* — they argue from those traditions' texts under the same `[Text]`/`[Interpretation]` discipline, but have no separate indexed corpus of their own and are **not** covered by strict verification. The 37 voices are not equally source-verified, and this project does not present them as if they were. The **default council** convenes ten voices — the eight evidence-backed traditions plus two interpretive voices, Judaism and secular humanism; the other voices join on request.
+
 | Level | Members |
 |---|---|
-| **Traditions** (8) | Christianity · Islam · Hinduism · Buddhism · Taoism · Legalism\* · Confucianism\* · Mohism\* |
-| **Denominations** | *Christianity:* Catholic · Orthodox · Protestant — *Islam:* Sunni · Shia |
-| **Thinkers** | *Christianity:* Jesus · Augustine · Aquinas · Luther · Calvin — *Islam:* Muhammad · al-Ghazali · Ibn Rushd — *Buddhism:* Shakyamuni · Nāgārjuna · Vasubandhu · Pure Land — *Hinduism:* Krishna · Shankara · Rāmānuja · Madhva — *Pre-Qin China:* Confucius · Mencius · Xunzi · Laozi · Zhuangzi |
-| **Non-religious** | Secular Humanism · J. S. Mill (liberty / utilitarianism) — *philosophical / ethical stances, not religions; outside the default eight, added on request* |
+| **Traditions** (8) — *evidence-backed* | Christianity · Islam · Hinduism · Buddhism · Taoism · Legalism\* · Confucianism\* · Mohism\* |
+| **Traditions** — *interpretive* | Judaism — *a tradition-level interpretive voice: no indexed corpus of its own and not strict-verified; represents the tradition, not a single denomination* |
+| **Denominations** — *interpretive* | *Christianity:* Catholic · Orthodox · Protestant — *Islam:* Sunni · Shia |
+| **Thinkers** — *interpretive* | *Christianity:* Jesus · Augustine · Aquinas · Luther · Calvin — *Islam:* Muhammad · al-Ghazali · Ibn Rushd — *Buddhism:* Shakyamuni · Nāgārjuna · Vasubandhu · Pure Land — *Hinduism:* Krishna · Shankara · Rāmānuja · Madhva — *Pre-Qin China:* Confucius · Mencius · Xunzi · Laozi · Zhuangzi |
+| **Non-religious** — *interpretive* | Secular Humanism *(part of the default council)* · J. S. Mill (liberty / utilitarianism) — *philosophical / ethical stances, not religions; Mill added on request* |
 
 \* Legalism, Confucianism, and Mohism are **philosophical / intellectual traditions**, not
 religions, and the skill labels them as such (and distinguishes philosophical from
@@ -86,7 +95,7 @@ religious Taoism where it matters).
 
 ## Quick start
 
-**1. Claude Code only** (uses the 37 custom agents):
+**1. Claude Code only** (uses the 38 custom agents):
 
 ```bash
 git clone https://github.com/F-e-u-e-r/religion-council.git
@@ -101,17 +110,17 @@ each `council-*` voice, relays their arguments to one another, and synthesizes.
 
 **2. Codex only** (portable, self-contained):
 
-Ask Codex to install `skills/religion-council/` from this repository, restart Codex, then invoke:
-> Use $religion-council to convene a sourced roundtable on whether life has meaning.
+Ask Codex to install `skills/worldwide-council/` from this repository, restart Codex, then invoke:
+> Use $worldwide-council to convene a sourced roundtable on whether life has meaning.
 
-`skills/religion-council/SKILL.md` is fully self-contained and degrades gracefully to a
+`skills/worldwide-council/SKILL.md` is fully self-contained and degrades gracefully to a
 single-context dialogue when sub-agents aren't available.
 
 **3. Claude moderator + Codex panelists**:
 
 Authenticate Codex, start Claude Code at the repo root, approve the project MCP server in
-`/mcp`, then ask Claude to use `religion-council-controller` with
-`orchestrator/panelists/religion-8.json`. The controller preserves each Codex `threadId`
+`/mcp`, then ask Claude to use `worldwide-council-controller` with
+`orchestrator/panelists/worldwide-10.json` (the default ten-voice council; `religion-8.json` is the eight evidence-backed traditions only). The controller preserves each Codex `threadId`
 across rounds and refuses to advance before the current round reaches its barrier.
 
 → Full per-platform setup: **[INSTALL.md](INSTALL.md)**
@@ -140,7 +149,7 @@ Must life's meaning come from religion or an afterlife? Secular humanism vs Chri
 
 ## Strict mode (opt-in)
 
-Strict mode lives in the hybrid controller (Claude moderator + Codex panelists) and is opt-in;
+Strict mode lives in the hybrid controller and is opt-in. **Today it requires a Claude Code moderator plus Codex panelists**; the portable skill layer and the Claude-only layer are not bound to any single vendor, and a provider-agnostic backend (bring-your-own-model for panelists) is planned for the next release.
 Claude-only and portable modes stay instruction-enforced. It is layered: `debate_start` can accept a
 retrieval `evidence_envelope`, ask panelists for a `religion-council/claim/v1` payload, schema-check
 it, repair or drop malformed payloads, and bind valid claims to evidence seeds. With
@@ -247,7 +256,7 @@ The **personas, moderation, and citation rules sit above the retrieval seam and 
 already stable.** Everything below it — curated snippets today, a vector store tomorrow —
 can evolve without rewriting a single voice.
 
-**Retrieval today.** The portable retriever (`skills/religion-council/scripts/retrieve.py`) is
+**Retrieval today.** The portable retriever (`skills/worldwide-council/scripts/retrieve.py`) is
 stdlib-only and file-based; the project retriever shares the same versioned retrieval envelope and a
 conformance suite (`tests/retrieval_contract/`, [ADR 0006](docs/adr/0006-retriever-fork-contract.md)).
 `retrieve.py` can merge curated `representation_kind`, `rendering_mode`, `provenance` and `rights`
@@ -274,15 +283,15 @@ religion/
 ├── VERSION                       # current release: v0.13.1
 ├── .mcp.json                     # Claude → deterministic Codex controller
 │
-├── skills/religion-council/      # ▸ PORTABLE skill (Codex & any agent)
+├── skills/worldwide-council/      # ▸ PORTABLE skill (Codex & any agent)
 │   ├── SKILL.md                  #   English operating manual (self-contained)
 │   ├── references/               #   16 persona files (snippets + citations)
 │   ├── scripts/retrieve.py       #   dependency-free lexical retrieval
 │   └── agents/openai.yaml        #   Codex interface metadata
 │
 ├── .claude/                      # ▸ CLAUDE CODE distribution
-│   ├── agents/council-*.md       #   37 sub-agents (1 moderator + 36 voices)
-│   └── skills/religion-council/
+│   ├── agents/council-*.md       #   38 sub-agents (1 moderator + 37 voices)
+│   └── skills/worldwide-council/
 │       ├── SKILL.md              #   繁中 operating manual
 │       ├── USAGE.md              #   how to convene a council
 │       ├── references/           #   16 persona files (+ 延伸語料 corpus pointers)
@@ -315,7 +324,7 @@ enforcement ladder) and **[ADR 0003](docs/adr/0003-retrieval-evidence-adapter.md
 (the retrieval→evidence adapter).
 
 **Axis A — corpus & retrieval.** Pivots on one seam: the retrieval envelope contract.
-Keep it stable and the 36 personas never change as the backend grows from files to a
+Keep it stable and the 37 personas never change as the backend grows from files to a
 vector service.
 
 | Stage | What | Retrieval |
@@ -397,24 +406,32 @@ Dual-licensed, by purpose:
 | **Skill logic** | [MIT](LICENSE) | `SKILL.md`, `USAGE.md`, `.claude/agents/*.md`, `orchestrator/`, `scripts/*.py`, `.mcp.json`, `agents/openai.yaml` |
 | **Written content** | [CC BY 4.0](LICENSE-CONTENT) | `references/`, the `01–08` corpus, `docs/CORPUS.md` |
 
-Quoted primary scriptures are public-domain source texts in their original languages; CC BY
-4.0 covers this project's curation, summaries, and renderings. Attribute to
-"Worldview Council contributors."
+Quoted primary scriptures are public-domain source texts in their original languages. The bundled
+Chinese wording is either a public-domain edition (和合本, 1919) or this project's own generated
+meaning-rendering (marked `generated-rendering` in `presentation.json`); no third-party translation
+believed to be in copyright is included. CC BY 4.0 covers this project's curation, summaries, and
+renderings. Attribute to "Worldwide Council contributors."
 
 ---
 ---
 
 # 繁體中文
 
-[English](#worldview-council--多傳統哲學議會) · **繁體中文**
+[English](#worldwide-council--多傳統哲學議會) · **繁體中文**
 
 > 以原典為據、由中立主持人調度的「跨傳統哲學議會」——可直接掛載到 AI coding agent 的 skill。
 
-_前稱「Religion Council」;為相容,repo / skill / MCP 識別碼仍維持 `religion-council`。_
+_原稱「Religion Council」，後更名為「Worldview Council」，現正式名稱為 **Worldwide Council**（2026 年 10 月起）；為相容，repo / skill / MCP 識別碼仍維持 `religion-council`。_
+
+**適合誰。** 使用 Claude Code、Codex 或任何支援 MCP 之 agent 的開發者,以及想要「有原典依據的多傳統辯論」而非單一混合口吻的教育者與跨宗教讀者。
+
+**安裝(Claude Code)。** `claude plugin marketplace add F-e-u-e-r/religion-council`,再執行 `claude plugin install worldwide-council@worldwide-council`。Codex 與其他 agent 見 [INSTALL.md](INSTALL.md)。
+
+**先看一場真實議會。** 以「人生有沒有意義?」為題的純 Claude 議會——[逐字稿](docs/showcase/2026-09-28-claude-only-meaning-of-life.md)。此為 instruction-enforced 層(引文於 curation 時以機器複核),**非** strict 模式。
 
 ## 這是什麼?
 
-**多傳統哲學議會(Worldview Council)** 讓你的 AI agent 化身為中立的**主持人**,召集一場
+**多傳統哲學議會(Worldwide Council)** 讓你的 AI agent 化身為中立的**主持人**,召集一場
 **以原典為據**、公平的跨傳統對話——而不是把各家硬揉成一團含糊的共識。
 
 問一句「人生有沒有意義?」,你會聽到佛教、道教、儒家**各自從自己的經典**立論。每一句發言都
@@ -423,7 +440,7 @@ _前稱「Religion Council」;為相容,repo / skill / MCP 識別碼仍維持 `r
 
 它支援三種執行方式:
 
-1. **純 Claude Code**——附 37 個專屬 agent(1 位主持人 + 36 個聲音)。
+1. **純 Claude Code**——附 38 個專屬 agent:1 位主持人 + 37 個聲音(8 個 evidence-backed 傳統 + 29 個 interpretive persona;見[收錄範圍](#收錄範圍))。
 2. **純 Codex**——可攜 Codex skill;明確要求時可用 Codex 原生 subagent。
 3. **Claude 主持 + Codex 議員**——Python MCP controller 保存 Codex threadId、執行
    barrier、重試及紀錄。
@@ -453,12 +470,15 @@ _前稱「Religion Council」;為相容,repo / skill / MCP 識別碼仍維持 `r
 
 ## 收錄範圍
 
+**兩層,誠實分開。** 下方**八個傳統**是 *evidence-backed* 層:各有精選、附出處的語料,由檢索器索引、也是 strict 模式據以核對的對象。**教派、人物與非宗教聲音**則是 *additional interpretive personas*——它們以相同的〔據典〕/〔詮釋〕紀律、從這些傳統的文本立論,但沒有各自獨立的可索引語料,也**不**在 strict 驗證涵蓋範圍內。37 個聲音並非同等 source-verified,本專案亦不作此呈現。**預設議會**為十席:八個 evidence-backed 傳統,加上猶太教與世俗人文主義兩個詮釋性聲音;其餘聲音按需加入。
+
 | 層級 | 成員 |
 |---|---|
-| **傳統**(8) | 基督宗教 · 伊斯蘭教 · 印度教 · 佛教 · 道教 · 法家\* · 儒家\* · 墨家\* |
-| **教派** | *基督宗教:* 天主教 · 東正教 · 新教 — *伊斯蘭教:* 遜尼 · 什葉 |
-| **人物** | *基督宗教:* 耶穌 · 奧古斯丁 · 阿奎那 · 路德 · 加爾文 — *伊斯蘭教:* 穆罕默德 · 安薩里 · 伊本·魯世德 — *佛教:* 釋迦牟尼 · 龍樹 · 世親 · 淨土 — *印度教:* 克里希納 · 商羯羅 · 羅摩奴闍 · 摩陀婆 — *先秦:* 孔子 · 孟子 · 荀子 · 老子 · 莊子 |
-| **非宗教** | 世俗人文主義 · 約翰·彌爾(自由/效益主義)— *哲學/倫理立場,非宗教,不屬八家;按需加入* |
+| **傳統**(8) — *evidence-backed* | 基督宗教 · 伊斯蘭教 · 印度教 · 佛教 · 道教 · 法家\* · 儒家\* · 墨家\* |
+| **傳統** — *interpretive* | 猶太教 — *傳統層次的詮釋性聲音:無自己的索引語料、不在 strict 驗證範圍;代表整體傳統而非單一教派* |
+| **教派** — *interpretive* | *基督宗教:* 天主教 · 東正教 · 新教 — *伊斯蘭教:* 遜尼 · 什葉 |
+| **人物** — *interpretive* | *基督宗教:* 耶穌 · 奧古斯丁 · 阿奎那 · 路德 · 加爾文 — *伊斯蘭教:* 穆罕默德 · 安薩里 · 伊本·魯世德 — *佛教:* 釋迦牟尼 · 龍樹 · 世親 · 淨土 — *印度教:* 克里希納 · 商羯羅 · 羅摩奴闍 · 摩陀婆 — *先秦:* 孔子 · 孟子 · 荀子 · 老子 · 莊子 |
+| **非宗教** — *interpretive* | 世俗人文主義 *(屬預設議會)* · 約翰·彌爾(自由/效益主義)— *哲學/倫理立場,非宗教,不屬八個 evidence-backed 傳統;彌爾按需加入* |
 
 \* 法家、儒家、墨家是**哲學/思想流派**而非宗教,skill 會據此標示(並在必要時區分哲學道家與
 宗教道教)。
@@ -480,22 +500,22 @@ claude            # 在專案根目錄開啟 Claude Code
 
 **2. 純 Codex**(可攜、自足):
 
-把 agent 的 skill 載入路徑指向 `skills/religion-council/`,然後呼叫:
-> Use $religion-council to convene a sourced roundtable on whether life has meaning.
+把 agent 的 skill 載入路徑指向 `skills/worldwide-council/`,然後呼叫:
+> Use $worldwide-council to convene a sourced roundtable on whether life has meaning.
 
-`skills/religion-council/SKILL.md` 完全自足;沒有 sub-agent 時會自動降級為單一脈絡內的對話。
+`skills/worldwide-council/SKILL.md` 完全自足;沒有 sub-agent 時會自動降級為單一脈絡內的對話。
 
 **3. Claude 主持 + Codex 議員**:
 
 先登入 Codex,在 repo 根目錄啟動 Claude Code,並於 `/mcp` 批准專案 MCP server;再請 Claude
-使用 `religion-council-controller` 與 `orchestrator/panelists/religion-8.json`。Controller
+使用 `worldwide-council-controller` 與 `orchestrator/panelists/worldwide-10.json`(預設十席議會;`religion-8.json` 僅為八個 evidence-backed 傳統)。Controller
 會跨輪保存同一批 Codex `threadId`,並在全員完成前阻止進入下一輪。
 
 → 各平台完整設定:**[INSTALL.md](INSTALL.md)**
 
 ## 嚴格模式 (opt-in)
 
-嚴格模式位於混合 controller(Claude 主持 + Codex 議員)且為 opt-in;純 Claude 與可攜模式仍維持
+嚴格模式位於混合 controller 且為 opt-in。**目前它需要 Claude Code 主持 + Codex 議員**;可攜 skill 層與純 Claude 層不綁任何單一廠商,provider-agnostic 後端(議員可自帶模型)規劃於下一版。純 Claude 與可攜模式仍維持
 instruction-enforced。它是分層的:`debate_start` 可接受 retrieval `evidence_envelope`、要求議員回傳
 `religion-council/claim/v1` payload、做 schema 檢查、修復或丟棄格式錯誤的 payload,並把有效 claim 綁定到
 evidence seeds。`verify_claims=true` 可把 quotation claim 對 curated evidence snapshot 做執行期驗證,並以每個
@@ -566,7 +586,7 @@ debate_start(profile="strict", evidence_envelope=…)
 version/category` metadata):**v0.1** 解析並以詞彙比對排序 references 片段,**未來**換成向量檢索,而上層的
 persona 與引用紀律不必更動。
 
-**目前的檢索。** portable retriever(`skills/religion-council/scripts/retrieve.py`)仍是 stdlib-only、
+**目前的檢索。** portable retriever(`skills/worldwide-council/scripts/retrieve.py`)仍是 stdlib-only、
 file-based;project retriever 則以同一份 versioned retrieval envelope 與 shared conformance suite
 (`tests/retrieval_contract/`、[ADR 0006](docs/adr/0006-retriever-fork-contract.md))為約束。`retrieve.py`
 可從可攜的 `presentation.json` sidecar 合併 curated `representation_kind`、`rendering_mode`、`provenance` 與
@@ -586,7 +606,7 @@ policy,但 default BM25 ranking flip 仍 gate 在 owner 接受或 human blind ju
 與 **[ADR 0003](docs/adr/0003-retrieval-evidence-adapter.md)**(檢索→證據 adapter)。
 
 **軸線 A — 語料與檢索。** 樞紐是一條接縫:檢索 envelope 契約。守住它,後端由檔案逐步升級為
-向量服務時,36 個 persona 都不必改。
+向量服務時,37 個 persona 都不必改。
 
 | 階段 | 內容 | 檢索 |
 |---|---|---|
@@ -657,5 +677,6 @@ operational redistribution clearance(`redistributable = true`、jurisdiction not
 | **Skill 邏輯** | [MIT](LICENSE) | `SKILL.md`、`USAGE.md`、`.claude/agents/*.md`、`orchestrator/`、`scripts/*.py`、`.mcp.json`、`agents/openai.yaml` |
 | **書面內容** | [CC BY 4.0](LICENSE-CONTENT) | `references/`、`01–08` 語料、`docs/CORPUS.md` |
 
-所引原典在其原文中多屬公有領域;CC BY 4.0 涵蓋的是本專案的選編、摘要與釋義。請標註出處
-「Worldview Council contributors」。
+所引原典在其原文中多屬公有領域;隨附的中文文字若非公有領域譯本(和合本 1919),即為本專案自製釋義
+(在 `presentation.json` 標為 `generated-rendering`),不收錄任何仍受版權保護的第三方譯本。CC BY 4.0 涵蓋的是
+本專案的選編、摘要與釋義。請標註出處「Worldwide Council contributors」。

@@ -21,7 +21,7 @@ content. Everything below assumes you follow them.
 
 A persona reference file lives in **two places**, and they differ only in two small ways:
 
-| | `skills/religion-council/references/` (portable) | `.claude/skills/religion-council/references/` (Claude) |
+| | `skills/worldwide-council/references/` (portable) | `.claude/skills/worldwide-council/references/` (Claude) |
 |---|---|---|
 | SKILL.md cite | by **English section name** ("Ground Every Position", "Maintain Representation Discipline") | by **number** (`SKILL.md 第三、四節`) |
 | `延伸語料` block | **omit** (the portable skill is dependency-free) | **include** pointers to `0X-<傳統>/典籍清單.md` + `思想概要.md` (when that corpus folder exists) |
@@ -68,8 +68,8 @@ tools: Read, Bash
 你是多傳統哲學議會中**代表<X>**的成員,以<X>師長的口吻發言:<tone>。
 
 回應前先讀:
-1. `.claude/skills/religion-council/SKILL.md`(共用操作手冊)
-2. `.claude/skills/religion-council/references/<file>.md`(你的 persona)
+1. `.claude/skills/worldwide-council/SKILL.md`(共用操作手冊)
+2. `.claude/skills/worldwide-council/references/<file>.md`(你的 persona)
 
 發言規則:
 - 嚴守 SKILL.md 第三節:〔據典〕附出處;〔詮釋〕標明。
@@ -83,13 +83,19 @@ tools: Read, Bash
 2. Add the `council-<slug>.md` sub-agent.
 3. **Register** it in:
    - `.claude/agents/council-moderator.md` — add to the correct level list (tradition / denomination / thinker).
-   - `.claude/skills/religion-council/USAGE.md` — add to the roster and an example prompt.
-   - **Routing**: `skills/religion-council/SKILL.md` ("Route References") and
-     `.claude/skills/religion-council/SKILL.md` (§五) if you added a new reference file.
+   - In the new agent body, write every resource path as `${CLAUDE_PLUGIN_ROOT}/…` and copy the
+     standard 路徑說明 note from an existing voice (plugin installs run from a cached copy; a
+     repository test rejects bare `.claude/skills/…` or `references/…` paths).
+   - `.claude/skills/worldwide-council/USAGE.md` — add to the roster and an example prompt.
+   - **Routing**: `skills/worldwide-council/SKILL.md` ("Route References") and
+     `.claude/skills/worldwide-council/SKILL.md` (§五) if you added a new reference file.
 4. If you added a new top-level **tradition** with a corpus folder, also register its code in
    both retrieval scripts' `TRADITIONS` maps and add it to
    `orchestrator/panelists/religion-8.json` (or rename that roster if the council no longer has
-   eight members).
+   eight members). The **default council roster** is `orchestrator/panelists/worldwide-10.json`
+   (the eight evidence-backed traditions + two interpretive voices, Judaism and secular humanism).
+   A voice can join that default roster **without** being evidence-backed: only a corpus-backed
+   tradition enters `TRADITIONS` and `religion-8.json`, which stay the eight-evidence set.
 
 ### Changing the hybrid controller
 
@@ -99,7 +105,7 @@ Mode 3 lives in `orchestrator/` and is exposed to Claude Code through `.mcp.json
 - Preserve `threadId` reuse across reply rounds.
 - Never bypass the complete-round barrier.
 - Keep panelist Codex sessions read-only with approval policy `never`.
-- Persist run records under `.religion-council/`, which must remain ignored by Git.
+- Persist run records under `.worldwide-council/`, which must remain ignored by Git.
 - Add or update `unittest` coverage in `tests/`.
 
 Run:
@@ -108,8 +114,8 @@ Run:
 python3 -m unittest discover -s tests -v
 python3 -m py_compile orchestrator/debate_controller.py \
   scripts/smoke_codex_mcp.py \
-  skills/religion-council/scripts/retrieve.py \
-  .claude/skills/religion-council/scripts/retrieve.py
+  skills/worldwide-council/scripts/retrieve.py \
+  .claude/skills/worldwide-council/scripts/retrieve.py
 ```
 
 CI uses the bundled fake Codex MCP server. Before a release or after changing Codex CLI versions,
@@ -141,7 +147,7 @@ from an arbitrary parenthetical note; register an explicit marker in both retrie
 - [ ] Registered in `council-moderator.md`, `USAGE.md`, and SKILL.md routing.
 - [ ] Every `[Text]` line has a real work **and** locator; failed source-bound claims are removed or retained only as non-supporting `[Unverified citation]`, never relabelled as `[Interpretation]`.
 - [ ] Sources are public-domain or openly licensed; no copyrighted modern translations.
-- [ ] Qur'an passages are labeled as renderings (e.g. 馬堅譯), not the Arabic original.
+- [ ] Qur'an passages are labeled as renderings (the project's own 釋義, or a public-domain translation named as such), not the Arabic original.
 - [ ] Tested in a **fresh** Claude Code session (sub-agents load at session start).
 - [ ] Hybrid-controller changes pass the complete test suite and preserve persistent thread IDs.
 
@@ -160,7 +166,7 @@ from an arbitrary parenthetical note; register an explicit marker in both retrie
 
 每個 persona reference 檔存在**兩處**,兩者只差兩個小地方:
 
-| | `skills/religion-council/references/`(可攜) | `.claude/skills/religion-council/references/`(Claude) |
+| | `skills/worldwide-council/references/`(可攜) | `.claude/skills/worldwide-council/references/`(Claude) |
 |---|---|---|
 | SKILL.md 引用 | 用**英文章節名**("Ground Every Position"、"Maintain Representation Discipline") | 用**節次**(`SKILL.md 第三、四節`) |
 | `延伸語料` 區塊 | **省略**(可攜 skill 零依賴) | **加入**指向 `0X-<傳統>/典籍清單.md`、`思想概要.md` 的指引(該語料夾存在時) |
@@ -206,8 +212,8 @@ tools: Read, Bash
 你是多傳統哲學議會中**代表<X>**的成員,以<X>師長的口吻發言:<語氣>。
 
 回應前先讀:
-1. `.claude/skills/religion-council/SKILL.md`
-2. `.claude/skills/religion-council/references/<file>.md`
+1. `.claude/skills/worldwide-council/SKILL.md`
+2. `.claude/skills/worldwide-council/references/<file>.md`
 
 發言規則:
 - 嚴守 SKILL.md 第三節:〔據典〕附出處;〔詮釋〕標明。
@@ -221,11 +227,15 @@ tools: Read, Bash
 2. 新增 `council-<slug>.md` sub-agent。
 3. **登錄**於:
    - `.claude/agents/council-moderator.md`——加到正確層級清單(傳統/教派/人物)。
-   - `.claude/skills/religion-council/USAGE.md`——加進名冊與一則範例。
-   - **路由**:若新增了 reference 檔,更新 `skills/religion-council/SKILL.md`(Route References)
-     與 `.claude/skills/religion-council/SKILL.md`(第五節)。
+   - 新 agent 內文的資源路徑一律寫成 `${CLAUDE_PLUGIN_ROOT}/…`,並複製既有成員的「路徑說明」段落
+     (plugin 安裝時是從快取副本執行;repository 測試會拒絕裸的 `.claude/skills/…` 或 `references/…` 路徑)。
+   - `.claude/skills/worldwide-council/USAGE.md`——加進名冊與一則範例。
+   - **路由**:若新增了 reference 檔,更新 `skills/worldwide-council/SKILL.md`(Route References)
+     與 `.claude/skills/worldwide-council/SKILL.md`(第五節)。
 4. 若新增的是有語料夾的頂層**傳統**,也要把代碼登錄到兩份 `retrieve.py` 的 `TRADITIONS`,
-   並更新 `orchestrator/panelists/religion-8.json`(若不再是八家,亦應重新命名名冊)。
+   並更新 `orchestrator/panelists/religion-8.json`(若不再是八家,亦應重新命名名冊)。**預設議會名冊**是
+   `orchestrator/panelists/worldwide-10.json`(八個 evidence-backed 傳統 + 猶太教與世俗人文主義兩個詮釋性聲音);
+   詮釋性聲音可加入該預設名冊而**不**成為 evidence-backed——只有有語料的傳統才進 `TRADITIONS` 與 `religion-8.json`(兩者維持八個 evidence 傳統)。
 
 ### 修改混合模式 controller
 
@@ -235,15 +245,15 @@ tools: Read, Bash
 - reply round 必須重用原本 `threadId`。
 - 不可繞過全員完成 barrier。
 - Codex 議員維持 read-only 與 approval policy `never`。
-- 紀錄放在已被 Git 忽略的 `.religion-council/`。
+- 紀錄放在已被 Git 忽略的 `.worldwide-council/`。
 - 在 `tests/` 新增或更新 `unittest`。
 
 ```bash
 python3 -m unittest discover -s tests -v
 python3 -m py_compile orchestrator/debate_controller.py \
   scripts/smoke_codex_mcp.py \
-  skills/religion-council/scripts/retrieve.py \
-  .claude/skills/religion-council/scripts/retrieve.py
+  skills/worldwide-council/scripts/retrieve.py \
+  .claude/skills/worldwide-council/scripts/retrieve.py
 ```
 
 CI 使用內附的假 Codex MCP server。發版前或更換 Codex CLI 版本後,另跑已登入的真實測試:
@@ -274,6 +284,6 @@ retriever。
 - [ ] 已登錄於 `council-moderator.md`、`USAGE.md` 與 SKILL.md 路由。
 - [ ] 每條 `〔據典〕` 都有真實書名**與**出處;失敗的附出處主張須移除,或僅以不構成支持的 `〔未驗證引用〕` 保留,不可改標 `〔詮釋〕`。
 - [ ] 來源為公有領域或開放授權;不含受版權保護的現代譯本。
-- [ ] 《古蘭經》引文標為釋義(如馬堅譯),非阿拉伯原文。
+- [ ] 《古蘭經》引文標為釋義(本專案釋義,或註明所用公有領域譯本),非阿拉伯原文。
 - [ ] 已在**全新** Claude Code session 測試(sub-agent 於啟動時載入)。
 - [ ] 混合 controller 修改已通過完整測試,並維持持久 threadId。

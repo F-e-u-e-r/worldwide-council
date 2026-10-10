@@ -141,12 +141,13 @@ Rosters use JSON to stay dependency-free:
 
 Included rosters:
 
-- `orchestrator/panelists/religion-8.json`: the eight broad tradition-level perspectives;
+- `orchestrator/panelists/worldwide-10.json`: the default ten-voice council (eight evidence-backed traditions + secular humanism + Judaism);
+- `orchestrator/panelists/religion-8.json`: the eight evidence-backed broad traditions only;
 - `orchestrator/panelists/thirty-member-example.json`: a generic 30-member decision panel.
 
 ## Persisted state
 
-Each run writes `.religion-council/runs/<run-id>/state.json`. It includes:
+Each run writes `.worldwide-council/runs/<run-id>/state.json`. It includes:
 
 - question and evidence packet;
 - panelist IDs, roles, and source reference paths;
@@ -206,7 +207,7 @@ All three execution modes share one quote-admissibility policy
 | Mode | Current enforcement | Scope |
 |---|---|---|
 | Hybrid controller (Claude moderator + Codex panelists) | instruction-enforced by default; opt-in B1b `structured-schema-enforced`; opt-in B2 `structured-claim-validated`; opt-in B3 `structured-fail-closed`; `profile="strict"` plus `debate_finalize` performs renderer finalization | Only strict-finalized responses have end-to-end machine-enforced construction and traceability of Surface A. The default path without `debate_finalize` is unchanged and not finalized. |
-| Claude-only (37 agents) | instruction-enforced | No strict renderer finalization. |
+| Claude-only (38 agents) | instruction-enforced | No strict renderer finalization. |
 | Portable (Codex / any agent) | instruction-enforced | No strict renderer finalization. |
 
 B1b **adds schema enforcement only** in the hybrid controller's opt-in structured path. It
@@ -291,7 +292,7 @@ Claude 只負責主持、匿名 issue matrix 與最終綜合。
 - Round 2 必須使用原本相同的 `threadId`。
 - 失敗只重試失敗者,不覆蓋成功結果。
 - 結果分頁讀取,避免一次把 30 份 transcript 塞進 Claude context。
-- 紀錄原子寫入 `.religion-council/runs/<run-id>/state.json`,且不 commit。
+- 紀錄原子寫入 `.worldwide-council/runs/<run-id>/state.json`,且不 commit。
 - B1b 結構化模式必須同時提供 `structured_claims=true` 與 `evidence_envelope`;controller 會把
   `religion-council/claim/v1` payload 綁定到本輪 evidence seeds,但驗證狀態仍為 `unverified`。
 - B2 驗證必須再加 `verify_claims=true`;controller 會讀 curated snapshot 驗證 claim,並把結果
@@ -358,7 +359,7 @@ python3 scripts/smoke_codex_mcp.py
 | 模式 | 目前強制方式 | 範圍 |
 |---|---|---|
 | 混合控制器(Claude 主持 + Codex 議員) | 預設以指示約束;opt-in B1b 成功綁定時為 `structured-schema-enforced`;opt-in B2 驗證執行後為 `structured-claim-validated`;opt-in B3 邊界執行後為 `structured-fail-closed`;`profile="strict"` + `debate_finalize` 執行 renderer finalization | 只有 strict-finalized responses 的 Surface A 具端到端 machine-enforced construction 與 traceability。未用 `debate_finalize` 的預設路徑不變且未 finalized。 |
-| 純 Claude(37 agents) | 以指示約束 | 沒有 strict renderer finalization。 |
+| 純 Claude(38 agents) | 以指示約束 | 沒有 strict renderer finalization。 |
 | 可攜(Codex / 任意 agent) | 以指示約束 | 沒有 strict renderer finalization。 |
 
 B1b 在混合控制器的 opt-in 結構化路徑只加入 **schema 強制**:解析並綁定

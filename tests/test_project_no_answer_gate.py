@@ -22,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ORCH = ROOT / "orchestrator"
-PORTABLE = ROOT / "skills" / "religion-council" / "scripts" / "retrieve.py"
+PORTABLE = ROOT / "skills" / "worldwide-council" / "scripts" / "retrieve.py"
 QUERIES = ROOT / "docs" / "benchmarks" / "queries" / "retrieval-v1.json"
 JUDGMENTS = ROOT / "docs" / "benchmarks" / "judgments" / "retrieval-v1.json"
 

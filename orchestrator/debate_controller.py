@@ -15,6 +15,7 @@ import os
 import queue
 import re
 import shlex
+import shutil
 import subprocess
 import sys
 import threading
@@ -205,6 +206,39 @@ def atomic_write_json(path, value):
     os.replace(str(temporary), str(path))
 
 
+def preflight_codex_command(command, cwd=None):
+    """Fail early, and readably, when the Codex CLI cannot be started at all.
+
+    Without this, a missing binary surfaces as ``subprocess.Popen``'s raw ``FileNotFoundError``
+    (``[Errno 2] No such file or directory: 'codex'``) inside a per-panelist job, so ``debate_start``
+    returns a round full of identical panelist "errors" instead of one actionable message. This only
+    checks that the executable resolves (``shutil.which`` honours absolute/relative paths too); it
+    does not authenticate or version-check Codex — ``codex login`` and the MCP ``tools/list`` handshake
+    still decide whether the server is usable. Known-accepted gaps: a wrapper executable
+    (``env … codex``) only proves the wrapper exists, and on Windows a ``codex.cmd`` found via PATHEXT
+    can still fail to spawn without a shell.
+
+    ``cwd`` is the directory ``subprocess.Popen`` will run in: a relative executable that contains a
+    path separator (``./bin/codex``) is resolved against it, exactly as Popen will, so the check and
+    the spawn agree.
+    """
+    if not command:
+        raise ControllerError(
+            "Codex command is empty: set CODEX_COMMAND (default 'codex mcp-server') or pass "
+            "--codex-command."
+        )
+    executable = command[0]
+    probe = executable
+    if cwd is not None and os.sep in executable and not os.path.isabs(executable):
+        probe = os.path.join(str(cwd), executable)
+    if shutil.which(probe) is None:
+        raise ControllerError(
+            "Codex CLI not found: {!r} is not an executable on PATH (CODEX_COMMAND={!r}). Install the "
+            "Codex CLI and run `codex login`, or point CODEX_COMMAND / --codex-command at the codex "
+            "binary.".format(executable, " ".join(command))
+        )
+
+
 class CodexMcpClient:
     """Minimal concurrent MCP client for the Codex stdio server."""
 
@@ -218,6 +252,7 @@ class CodexMcpClient:
         self._pending = {}
         self._stderr = []
         self._closed = False
+        preflight_codex_command(command, cwd=self.cwd)  # readable error instead of a raw FileNotFoundError
         self.process = subprocess.Popen(
             command,
             cwd=self.cwd,
@@ -359,7 +394,7 @@ class CodexMcpClient:
                 "protocolVersion": PROTOCOL_VERSION,
                 "capabilities": {},
                 "clientInfo": {
-                    "name": "religion-council-controller",
+                    "name": "worldwide-council-controller",
                     "version": CONTROLLER_VERSION,
                 },
             },
@@ -427,9 +462,18 @@ class CodexMcpClient:
 class DebateController:
     def __init__(self, project_root, state_dir=None, codex_command=None):
         self.project_root = Path(project_root).resolve()
-        self.state_dir = Path(
-            state_dir or self.project_root / ".religion-council" / "runs"
-        ).resolve()
+        if state_dir:
+            self.state_dir = Path(state_dir).resolve()
+        else:
+            # Brand-identity migration: default run state to the Worldwide Council path.
+            # If a pre-migration .religion-council/runs exists and the new path does not,
+            # keep using it (read + write) so existing run state is not orphaned — no
+            # destructive move. Plugin mode passes an explicit --state-dir under
+            # ${CLAUDE_PLUGIN_DATA} and never reaches this branch.
+            _new_runs = self.project_root / ".worldwide-council" / "runs"
+            _old_runs = self.project_root / ".religion-council" / "runs"
+            _chosen = _old_runs if _old_runs.exists() and not _new_runs.exists() else _new_runs
+            self.state_dir = _chosen.resolve()
         command_text = codex_command or os.environ.get("CODEX_COMMAND", "codex mcp-server")
         self.codex_command = shlex.split(command_text)
         self._client = None
@@ -480,6 +524,26 @@ class DebateController:
         if not path.is_absolute():
             path = self.project_root / path
         return self._assert_within_project_root(path)
+
+    def _resolve_run_cwd(self, cwd):
+        """Fence the moderator-supplied Codex working directory to the project root.
+
+        ``cwd`` is passed straight through to every ``codex`` / ``codex-reply`` tool call as the
+        panelist's working directory, so — exactly like ``panelists_file`` / ``reference`` (#53) — a
+        prompt-injection-led moderator could point the (read-only) Codex sandbox at an arbitrary local
+        directory. Omitted / empty means the project root; anything else must resolve inside it.
+        """
+        if cwd is None or cwd == "":
+            return self.project_root
+        if not isinstance(cwd, str):
+            raise ControllerError("cwd must be a string path inside the project root.")
+        path = Path(cwd)
+        if not path.is_absolute():
+            path = self.project_root / path
+        resolved = self._assert_within_project_root(path)
+        if not resolved.is_dir():
+            raise ControllerError("cwd is not an existing directory: {}".format(resolved))
+        return resolved
 
     def load_panelists(self, panelists_file):
         path = self._resolve_panelists_file(panelists_file)
@@ -991,6 +1055,13 @@ Return:
         guard_weaponization_routing(weaponization_classification)
         if not isinstance(question, str) or not question.strip():
             raise ControllerError("question is required.")
+        # Cheap preconditions before any run work (no run dir, no snapshots, no panelist jobs):
+        # the Codex CLI must be startable at all, and the panelist working directory must stay
+        # inside the project root (a per-job error inside _call_with_retries would otherwise
+        # surface as N identical panelist failures instead of one actionable message).
+        if self._client is None:  # an injected client (offline fixture / tests) never spawns the CLI
+            preflight_codex_command(self.codex_command, cwd=self.project_root)
+        run_cwd = self._resolve_run_cwd(cwd)
         # Strict profile is a configuration invariant (ADR 0004 §8) — it turns on the whole
         # structured -> verify -> fail-closed -> finalize graph and FAILS at config time if a
         # component is missing or explicitly contradicted; it never silently degrades to B0.
@@ -1080,7 +1151,7 @@ Return:
                 }
                 for item in panelists
             ],
-            "cwd": str(Path(cwd or self.project_root).resolve()),
+            "cwd": str(run_cwd),
             "created_at": utc_now(),
             "updated_at": utc_now(),
             "rounds": {},
@@ -1179,6 +1250,9 @@ Return:
         retries=1,
     ):
         state = self._load_state(run_id)
+        # Re-fence the persisted working directory: run state predating the cwd fence (or edited
+        # on disk) must not resurrect an outside cwd on the retry path.
+        state["cwd"] = str(self._resolve_run_cwd(state.get("cwd")))
         if not state["rounds"]:
             raise ControllerError("The run has no rounds.")
         selected_round = int(
@@ -1435,6 +1509,7 @@ def tool_definitions():
                     "verify_claims": {"type": "boolean"},
                     "fail_closed": {"type": "boolean"},
                     "profile": {"type": "string", "enum": ["strict"]},
+                    # Panelist working directory; fenced to the project root by start() (#53 sibling).
                     "cwd": {"type": "string"},
                     # Safety ROUTING label (not detection): start() refuses a crisis-first request
                     # before any run work AND rejects any other non-null value, so a non-validating
@@ -1591,8 +1666,8 @@ class ControllerMcpServer:
                     "protocolVersion": PROTOCOL_VERSION,
                     "capabilities": {"tools": {"listChanged": False}},
                     "serverInfo": {
-                        "name": "religion-council-controller",
-                        "title": "Worldview Council Debate Controller",
+                        "name": "worldwide-council-controller",
+                        "title": "Worldwide Council Debate Controller",
                         "version": CONTROLLER_VERSION,
                     },
                 },
@@ -1656,7 +1731,8 @@ class ControllerMcpServer:
 
 def default_project_root():
     value = (
-        os.environ.get("RELIGION_COUNCIL_PROJECT_DIR")
+        os.environ.get("WORLDWIDE_COUNCIL_PROJECT_DIR")
+        or os.environ.get("RELIGION_COUNCIL_PROJECT_DIR")  # pre-migration compatibility alias
         or os.environ.get("CLAUDE_PROJECT_DIR")
     )
     if value:

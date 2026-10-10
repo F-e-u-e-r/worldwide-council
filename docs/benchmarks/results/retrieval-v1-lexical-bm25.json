@@ -20,9 +20,9 @@
       "occ/v1-corpus-stable": 38
     },
     "records_evaluated": 38,
-    "representation_metadata_records": 13,
+    "representation_metadata_records": 23,
     "required_envelope_fields_present": true,
-    "rights_metadata_records": 16,
+    "rights_metadata_records": 27,
     "source_assurance_artifact_backed_count": 38,
     "span_assurance": {
       "all_records_artifact_backed": true,
@@ -110,7 +110,7 @@
           "locator": "reference file entry",
           "rank": 1,
           "relevance": 2,
-          "score": 48.992896,
+          "score": 49.174666,
           "tradition": "confucianism",
           "work": "論語·顏淵"
         },
@@ -118,7 +118,7 @@
           "locator": "reference file entry",
           "rank": 2,
           "relevance": 0,
-          "score": 4.892733,
+          "score": 4.921361,
           "tradition": "confucianism",
           "work": "孟子·告子下"
         },
@@ -126,7 +126,7 @@
           "locator": "22:37-39",
           "rank": 3,
           "relevance": 0,
-          "score": 4.545191,
+          "score": 4.587348,
           "tradition": "christianity",
           "work": "馬太福音"
         },
@@ -134,7 +134,7 @@
           "locator": "reference file entry",
           "rank": 4,
           "relevance": 0,
-          "score": 4.267923,
+          "score": 4.290861,
           "tradition": "mohism",
           "work": "墨子·非攻上"
         },
@@ -142,7 +142,7 @@
           "locator": "reference file entry",
           "rank": 5,
           "relevance": 0,
-          "score": 3.844877,
+          "score": 3.720567,
           "tradition": "buddhism",
           "work": "金剛經"
         }
@@ -172,7 +172,7 @@
           "locator": "8",
           "rank": 1,
           "relevance": 2,
-          "score": 32.216944,
+          "score": 32.374207,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -180,7 +180,7 @@
           "locator": "reference file entry",
           "rank": 2,
           "relevance": 0,
-          "score": 4.075897,
+          "score": 4.098267,
           "tradition": "mohism",
           "work": "墨子·兼愛中"
         },
@@ -188,7 +188,7 @@
           "locator": "多處(如 2:25、103 章)",
           "rank": 3,
           "relevance": 0,
-          "score": 3.323805,
+          "score": 3.345184,
           "tradition": "islam",
           "work": "古蘭經"
         },
@@ -196,7 +196,7 @@
           "locator": "reference file entry",
           "rank": 4,
           "relevance": 0,
-          "score": 2.736604,
+          "score": 2.760098,
           "tradition": "buddhism",
           "work": "般若波羅蜜多心經"
         },
@@ -204,7 +204,7 @@
           "locator": "183",
           "rank": 5,
           "relevance": 0,
-          "score": 2.604182,
+          "score": 2.625116,
           "tradition": "buddhism",
           "work": "法句經"
         }
@@ -234,7 +234,7 @@
           "locator": "reference file entry",
           "rank": 1,
           "relevance": 2,
-          "score": 25.727914,
+          "score": 25.871405,
           "tradition": "buddhism",
           "work": "般若波羅蜜多心經"
         },
@@ -242,7 +242,7 @@
           "locator": "6.8.7",
           "rank": 2,
           "relevance": 0,
-          "score": 6.301137,
+          "score": 6.343877,
           "tradition": "hinduism",
           "work": "歌者奧義書"
         },
@@ -250,7 +250,7 @@
           "locator": "1.4.10",
           "rank": 3,
           "relevance": 0,
-          "score": 6.238227,
+          "score": 6.281393,
           "tradition": "hinduism",
           "work": "廣林奧義書"
         },
@@ -258,7 +258,7 @@
           "locator": "1:2",
           "rank": 4,
           "relevance": 0,
-          "score": 4.507112,
+          "score": 4.524732,
           "tradition": "christianity",
           "work": "傳道書"
         },
@@ -266,7 +266,7 @@
           "locator": "reference file entry",
           "rank": 5,
           "relevance": 0,
-          "score": 2.888411,
+          "score": 2.911298,
           "tradition": "legalism",
           "work": "韓非子·五蠹"
         }
@@ -296,7 +296,7 @@
           "locator": "48",
           "rank": 1,
           "relevance": 2,
-          "score": 38.456529,
+          "score": 38.740587,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -304,7 +304,7 @@
           "locator": "1",
           "rank": 2,
           "relevance": 0,
-          "score": 10.855759,
+          "score": 10.924536,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -312,7 +312,7 @@
           "locator": "25",
           "rank": 3,
           "relevance": 0,
-          "score": 10.736894,
+          "score": 10.806874,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -320,7 +320,7 @@
           "locator": "8",
           "rank": 4,
           "relevance": 0,
-          "score": 10.32341,
+          "score": 10.396387,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -328,7 +328,7 @@
           "locator": "58",
           "rank": 5,
           "relevance": 0,
-          "score": 10.32341,
+          "score": 10.396387,
           "tradition": "taoism",
           "work": "道德經"
         }
@@ -358,7 +358,7 @@
           "locator": "3:16",
           "rank": 1,
           "relevance": 2,
-          "score": 21.572816,
+          "score": 21.808849,
           "tradition": "christianity",
           "work": "約翰福音"
         },
@@ -366,7 +366,7 @@
           "locator": "1:1",
           "rank": 2,
           "relevance": 0,
-          "score": 21.551197,
+          "score": 21.719427,
           "tradition": "christianity",
           "work": "約翰福音"
         },
@@ -374,7 +374,7 @@
           "locator": "22:37-39",
           "rank": 3,
           "relevance": 0,
-          "score": 7.503254,
+          "score": 7.572848,
           "tradition": "christianity",
           "work": "馬太福音"
         },
@@ -382,7 +382,7 @@
           "locator": "58",
           "rank": 4,
           "relevance": 0,
-          "score": 4.08154,
+          "score": 4.097818,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -390,7 +390,7 @@
           "locator": "1.3.28",
           "rank": 5,
           "relevance": 0,
-          "score": 2.753095,
+          "score": 2.617191,
           "tradition": "hinduism",
           "work": "廣林奧義書"
         }
@@ -420,23 +420,23 @@
           "locator": "1:1(開端章)",
           "rank": 1,
           "relevance": 2,
-          "score": 29.912382,
-          "tradition": "islam",
-          "work": "古蘭經"
-        },
-        {
-          "locator": "112:1-4(忠誠章)",
-          "rank": 2,
-          "relevance": 0,
-          "score": 15.009796,
+          "score": 30.139463,
           "tradition": "islam",
           "work": "古蘭經"
         },
         {
           "locator": "多處(如 2:25、103 章)",
+          "rank": 2,
+          "relevance": 0,
+          "score": 12.122437,
+          "tradition": "islam",
+          "work": "古蘭經"
+        },
+        {
+          "locator": "112:1-4(忠誠章)",
           "rank": 3,
           "relevance": 0,
-          "score": 12.019382,
+          "score": 11.274322,
           "tradition": "islam",
           "work": "古蘭經"
         },
@@ -444,7 +444,7 @@
           "locator": "2:256",
           "rank": 4,
           "relevance": 0,
-          "score": 10.548155,
+          "score": 10.35891,
           "tradition": "islam",
           "work": "古蘭經"
         },
@@ -452,7 +452,7 @@
           "locator": "51:56",
           "rank": 5,
           "relevance": 0,
-          "score": 9.565331,
+          "score": 10.274157,
           "tradition": "islam",
           "work": "古蘭經"
         }
@@ -482,7 +482,7 @@
           "locator": "22:37-39",
           "rank": 1,
           "relevance": 0,
-          "score": 7.849678,
+          "score": 8.242577,
           "tradition": "christianity",
           "work": "馬太福音"
         },
@@ -490,7 +490,7 @@
           "locator": "reference file entry",
           "rank": 2,
           "relevance": 2,
-          "score": 7.024192,
+          "score": 7.070857,
           "tradition": "confucianism",
           "work": "論語·顏淵"
         },
@@ -498,7 +498,7 @@
           "locator": "6:8",
           "rank": 3,
           "relevance": 0,
-          "score": 6.63864,
+          "score": 6.983182,
           "tradition": "christianity",
           "work": "彌迦書"
         },
@@ -506,7 +506,7 @@
           "locator": "25",
           "rank": 4,
           "relevance": 0,
-          "score": 6.394416,
+          "score": 6.431662,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -514,7 +514,7 @@
           "locator": "3:16",
           "rank": 5,
           "relevance": 0,
-          "score": 5.252463,
+          "score": 5.309932,
           "tradition": "christianity",
           "work": "約翰福音"
         }
@@ -544,7 +544,7 @@
           "locator": "2:47",
           "rank": 1,
           "relevance": 2,
-          "score": 31.790297,
+          "score": 28.774147,
           "tradition": "hinduism",
           "work": "薄伽梵歌"
         },
@@ -552,7 +552,7 @@
           "locator": "2:48",
           "rank": 2,
           "relevance": 1,
-          "score": 21.448898,
+          "score": 21.607536,
           "tradition": "hinduism",
           "work": "薄伽梵歌"
         },
@@ -560,7 +560,7 @@
           "locator": "reference file entry",
           "rank": 3,
           "relevance": 0,
-          "score": 6.89608,
+          "score": 6.380886,
           "tradition": "confucianism",
           "work": "孟子·告子下"
         },
@@ -568,17 +568,17 @@
           "locator": "難三",
           "rank": 4,
           "relevance": 0,
-          "score": 5.669348,
+          "score": 5.708412,
           "tradition": "legalism",
           "work": "韓非子"
         },
         {
-          "locator": "2:20",
+          "locator": "6:8",
           "rank": 5,
           "relevance": 0,
-          "score": 5.012732,
-          "tradition": "hinduism",
-          "work": "薄伽梵歌"
+          "score": 5.257406,
+          "tradition": "christianity",
+          "work": "彌迦書"
         }
       ]
     },
@@ -606,7 +606,7 @@
           "locator": "6:8",
           "rank": 1,
           "relevance": 2,
-          "score": 19.693994,
+          "score": 19.920064,
           "tradition": "christianity",
           "work": "彌迦書"
         },
@@ -614,7 +614,7 @@
           "locator": "2:48",
           "rank": 2,
           "relevance": 0,
-          "score": 6.987621,
+          "score": 7.041722,
           "tradition": "hinduism",
           "work": "薄伽梵歌"
         },
@@ -622,7 +622,7 @@
           "locator": "reference file entry",
           "rank": 3,
           "relevance": 0,
-          "score": 4.355944,
+          "score": 4.379355,
           "tradition": "mohism",
           "work": "墨子·非攻上"
         },
@@ -630,17 +630,17 @@
           "locator": "4:7",
           "rank": 4,
           "relevance": 0,
-          "score": 4.30604,
+          "score": 4.343454,
           "tradition": "hinduism",
           "work": "薄伽梵歌"
         },
         {
-          "locator": "多處(如 2:25、103 章)",
+          "locator": "為政",
           "rank": 5,
           "relevance": 0,
-          "score": 3.868461,
-          "tradition": "islam",
-          "work": "古蘭經"
+          "score": 3.939202,
+          "tradition": "confucianism",
+          "work": "論語"
         }
       ]
     },
@@ -668,7 +668,7 @@
           "locator": "1.3.28",
           "rank": 1,
           "relevance": 1,
-          "score": 8.412802,
+          "score": 8.740908,
           "tradition": "hinduism",
           "work": "廣林奧義書"
         },
@@ -676,7 +676,7 @@
           "locator": "reference file entry",
           "rank": 2,
           "relevance": 0,
-          "score": 4.973072,
+          "score": 4.73469,
           "tradition": "confucianism",
           "work": "孟子·告子下"
         },
@@ -684,25 +684,25 @@
           "locator": "22:37-39",
           "rank": 3,
           "relevance": 0,
-          "score": 4.545191,
+          "score": 4.587348,
           "tradition": "christianity",
           "work": "馬太福音"
         },
         {
-          "locator": "6:8",
+          "locator": "3:16",
           "rank": 4,
           "relevance": 0,
-          "score": 3.892738,
-          "tradition": "christianity",
-          "work": "彌迦書"
-        },
-        {
-          "locator": "3:16",
-          "rank": 5,
-          "relevance": 0,
-          "score": 3.873775,
+          "score": 3.916159,
           "tradition": "christianity",
           "work": "約翰福音"
+        },
+        {
+          "locator": "reference file entry",
+          "rank": 5,
+          "relevance": 0,
+          "score": 3.701725,
+          "tradition": "buddhism",
+          "work": "金剛經"
         }
       ]
     },
@@ -730,7 +730,7 @@
           "locator": "22:37-39",
           "rank": 1,
           "relevance": 2,
-          "score": 8.321731,
+          "score": 8.38979,
           "tradition": "christianity",
           "work": "馬太福音"
         },
@@ -738,7 +738,7 @@
           "locator": "reference file entry",
           "rank": 2,
           "relevance": 1,
-          "score": 5.792602,
+          "score": 5.829382,
           "tradition": "mohism",
           "work": "墨子·兼愛中"
         },
@@ -746,7 +746,7 @@
           "locator": "3:16",
           "rank": 3,
           "relevance": 1,
-          "score": 4.356202,
+          "score": 4.395302,
           "tradition": "christianity",
           "work": "約翰福音"
         },
@@ -754,7 +754,7 @@
           "locator": "reference file entry",
           "rank": 4,
           "relevance": 0,
-          "score": 2.703238,
+          "score": 2.723687,
           "tradition": "mohism",
           "work": "墨子·天志上"
         },
@@ -762,7 +762,7 @@
           "locator": "reference file entry",
           "rank": 5,
           "relevance": 0,
-          "score": 2.522585,
+          "score": 2.536143,
           "tradition": "mohism",
           "work": "墨子·非攻上"
         }
@@ -792,7 +792,7 @@
           "locator": "6.8.7",
           "rank": 1,
           "relevance": 2,
-          "score": 12.321807,
+          "score": 12.405385,
           "tradition": "hinduism",
           "work": "歌者奧義書"
         },
@@ -854,7 +854,7 @@
           "locator": "開卷傳述(附傳述鏈)",
           "rank": 1,
           "relevance": 2,
-          "score": 13.753182,
+          "score": 13.819051,
           "tradition": "islam",
           "work": "布哈里聖訓實錄"
         },
@@ -862,33 +862,33 @@
           "locator": "尚賢上",
           "rank": 2,
           "relevance": 0,
-          "score": 3.066602,
+          "score": 3.092929,
           "tradition": "mohism",
           "work": "墨子"
         },
         {
-          "locator": "1(南傳)",
+          "locator": "1:1",
           "rank": 3,
           "relevance": 0,
-          "score": 2.786133,
-          "tradition": "buddhism",
-          "work": "法句經"
-        },
-        {
-          "locator": "1:1",
-          "rank": 4,
-          "relevance": 0,
-          "score": 1.929563,
+          "score": 2.057298,
           "tradition": "christianity",
           "work": "創世記"
         },
         {
           "locator": "reference file entry",
-          "rank": 5,
+          "rank": 4,
           "relevance": 0,
-          "score": 1.801122,
+          "score": 1.922112,
           "tradition": "mohism",
           "work": "墨子·天志上"
+        },
+        {
+          "locator": "1:2",
+          "rank": 5,
+          "relevance": 0,
+          "score": 1.904236,
+          "tradition": "christianity",
+          "work": "傳道書"
         }
       ]
     },
@@ -905,7 +905,7 @@
           "locator": "開卷傳述(附傳述鏈)",
           "rank": 1,
           "relevance": 0,
-          "score": 3.177883,
+          "score": 3.160513,
           "tradition": "islam",
           "work": "布哈里聖訓實錄"
         },
@@ -942,7 +942,7 @@
           "work": "創世記"
         }
       ],
-      "top1_score": 3.177883
+      "top1_score": 3.160513
     },
     {
       "category": "no_answer",
@@ -957,21 +957,13 @@
           "locator": "1.4.10",
           "rank": 1,
           "relevance": 0,
-          "score": 4.066262,
+          "score": 4.094399,
           "tradition": "hinduism",
           "work": "廣林奧義書"
         },
         {
-          "locator": "2:20",
-          "rank": 2,
-          "relevance": 0,
-          "score": 3.446829,
-          "tradition": "hinduism",
-          "work": "薄伽梵歌"
-        },
-        {
           "locator": "1(南傳)",
-          "rank": 3,
+          "rank": 2,
           "relevance": 0,
           "score": 0.0,
           "tradition": "buddhism",
@@ -979,7 +971,7 @@
         },
         {
           "locator": "2:47",
-          "rank": 4,
+          "rank": 3,
           "relevance": 0,
           "score": 0.0,
           "tradition": "hinduism",
@@ -987,14 +979,22 @@
         },
         {
           "locator": "偈(漢傳常引)",
-          "rank": 5,
+          "rank": 4,
           "relevance": 0,
           "score": 0.0,
           "tradition": "buddhism",
           "work": "大般涅槃經"
+        },
+        {
+          "locator": "1:1",
+          "rank": 5,
+          "relevance": 0,
+          "score": 0.0,
+          "tradition": "christianity",
+          "work": "創世記"
         }
       ],
-      "top1_score": 4.066262
+      "top1_score": 4.094399
     },
     {
       "category": "ambiguous",
@@ -1020,7 +1020,7 @@
           "locator": "1",
           "rank": 1,
           "relevance": 2,
-          "score": 2.366786,
+          "score": 2.371346,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1028,7 +1028,7 @@
           "locator": "25",
           "rank": 2,
           "relevance": 1,
-          "score": 2.247921,
+          "score": 2.253685,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1036,7 +1036,7 @@
           "locator": "48",
           "rank": 3,
           "relevance": 0,
-          "score": 2.177394,
+          "score": 2.184192,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1044,7 +1044,7 @@
           "locator": "1:1",
           "rank": 4,
           "relevance": 1,
-          "score": 2.136722,
+          "score": 2.14357,
           "tradition": "christianity",
           "work": "約翰福音"
         },
@@ -1052,7 +1052,7 @@
           "locator": "8",
           "rank": 5,
           "relevance": 0,
-          "score": 1.992871,
+          "score": 2.000819,
           "tradition": "taoism",
           "work": "道德經"
         }
@@ -1082,7 +1082,7 @@
           "locator": "25",
           "rank": 1,
           "relevance": 2,
-          "score": 25.663114,
+          "score": 25.808996,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1090,7 +1090,7 @@
           "locator": "1",
           "rank": 2,
           "relevance": 2,
-          "score": 10.855759,
+          "score": 10.924536,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1098,7 +1098,7 @@
           "locator": "8",
           "rank": 3,
           "relevance": 0,
-          "score": 10.32341,
+          "score": 10.396387,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1106,7 +1106,7 @@
           "locator": "58",
           "rank": 4,
           "relevance": 0,
-          "score": 10.32341,
+          "score": 10.396387,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1114,7 +1114,7 @@
           "locator": "48",
           "rank": 5,
           "relevance": 1,
-          "score": 9.929226,
+          "score": 10.003377,
           "tradition": "taoism",
           "work": "道德經"
         }
@@ -1144,7 +1144,7 @@
           "locator": "1(南傳)",
           "rank": 1,
           "relevance": 2,
-          "score": 13.41893,
+          "score": 12.478534,
           "tradition": "buddhism",
           "work": "法句經"
         },
@@ -1152,7 +1152,7 @@
           "locator": "183",
           "rank": 2,
           "relevance": 2,
-          "score": 12.111032,
+          "score": 12.208389,
           "tradition": "buddhism",
           "work": "法句經"
         },
@@ -1160,7 +1160,7 @@
           "locator": "25",
           "rank": 3,
           "relevance": 0,
-          "score": 3.559372,
+          "score": 3.574489,
           "tradition": "taoism",
           "work": "道德經"
         },
@@ -1168,7 +1168,7 @@
           "locator": "(初轉法輪,南傳)",
           "rank": 4,
           "relevance": 0,
-          "score": 3.266303,
+          "score": 3.283118,
           "tradition": "buddhism",
           "work": "轉法輪經"
         },
@@ -1176,7 +1176,7 @@
           "locator": "偈(漢傳常引)",
           "rank": 5,
           "relevance": 0,
-          "score": 2.339796,
+          "score": 2.360364,
           "tradition": "buddhism",
           "work": "大般涅槃經"
         }

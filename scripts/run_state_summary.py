@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only cross-run observability summary over ``.religion-council/runs/*/state.json``.
+"""Read-only cross-run observability summary over ``.worldwide-council/runs/*/state.json`` (falls back to ``.religion-council/runs`` pre-migration).
 
 Aggregates operational rates the per-run state already records — enforcement-mode
 distribution, round outcomes, schema / boundary / finalization results, denial reason
@@ -23,7 +23,13 @@ sys.path.insert(0, str(ROOT / "orchestrator"))
 # from what the controller itself reports; it is a pure function over a state dict.
 from debate_controller import DebateController  # noqa: E402
 
-DEFAULT_RUNS_DIR = ROOT / ".religion-council" / "runs"
+_NEW_RUNS_DIR = ROOT / ".worldwide-council" / "runs"
+_OLD_RUNS_DIR = ROOT / ".religion-council" / "runs"
+# Read the Worldwide Council runs path by default; fall back to the pre-migration
+# .religion-council/runs only when it exists and the new path does not.
+DEFAULT_RUNS_DIR = (
+    _OLD_RUNS_DIR if _OLD_RUNS_DIR.exists() and not _NEW_RUNS_DIR.exists() else _NEW_RUNS_DIR
+)
 
 
 def _new_summary(runs_dir):
@@ -240,7 +246,7 @@ def main(argv=None):
     parser.add_argument(
         "--runs-dir",
         default=str(DEFAULT_RUNS_DIR),
-        help="Directory holding <run_id>/state.json (default: .religion-council/runs)",
+        help="Directory holding <run_id>/state.json (default: .worldwide-council/runs, falls back to .religion-council/runs)",
     )
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
     args = parser.parse_args(argv)

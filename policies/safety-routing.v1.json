@@ -53,13 +53,13 @@
       "must_contain": ["supplementary reflection", "輔助性反思"]
     },
     {
-      "path": "skills/religion-council/SKILL.md",
+      "path": "skills/worldwide-council/SKILL.md",
       "role": "portable skill",
       "locales": ["en"],
       "must_contain": ["address immediate safety and professional guidance first"]
     },
     {
-      "path": ".claude/skills/religion-council/SKILL.md",
+      "path": ".claude/skills/worldwide-council/SKILL.md",
       "role": "Claude project skill",
       "locales": ["zh-Hant"],
       "must_contain": ["crisis-first", "不啟動議會", "即時安全"]
