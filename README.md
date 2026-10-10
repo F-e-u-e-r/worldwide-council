@@ -8,7 +8,7 @@
 ![code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)
 ![content: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-lightgrey.svg)
 ![runs on: Codex · Claude Code · any agent](https://img.shields.io/badge/runs%20on-Codex%20·%20Claude%20Code%20·%20any%20agent-green.svg)
-![version: v0.1.0-beta.1](https://img.shields.io/badge/version-v0.1.0--beta.1-orange.svg)
+![version: v1.0.0-beta.1](https://img.shields.io/badge/version-v1.0.0--beta.1-orange.svg)
 ![status](https://img.shields.io/badge/status-ACTIVE-7aa2ff)
 
 **English** · [繁體中文](#繁體中文)
@@ -280,7 +280,7 @@ religion/
 ├── DISCLAIMER.md                 # sourcing rules + religious-sensitivity statement
 ├── LICENSE                       # MIT — skill logic, agents, scripts, config
 ├── LICENSE-CONTENT               # CC BY 4.0 — references & corpus
-├── VERSION                       # current release: v0.1.0-beta.1
+├── VERSION                       # current release: v1.0.0-beta.1
 ├── .mcp.json                     # Claude → deterministic Codex controller
 │
 ├── skills/worldwide-council/      # ▸ PORTABLE skill (Codex & any agent)
