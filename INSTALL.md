@@ -28,8 +28,8 @@ failure handling.
 Clone the repository:
 
 ```bash
-git clone https://github.com/F-e-u-e-r/religion-council.git
-cd religion-council
+git clone https://github.com/F-e-u-e-r/worldwide-council.git
+cd worldwide-council
 ```
 
 ## Mode 1 — Claude Code
@@ -54,7 +54,7 @@ The repository is also a Claude Code plugin with its own marketplace file, so yo
 once and convene a council from any working directory:
 
 ```bash
-claude plugin marketplace add F-e-u-e-r/religion-council      # once
+claude plugin marketplace add F-e-u-e-r/worldwide-council      # once
 claude plugin install worldwide-council@worldwide-council
 cd ~/anywhere && claude --agent worldwide-council:council-moderator
 ```
@@ -78,7 +78,7 @@ Install the portable skill from GitHub:
 
 ```text
 Use $skill-installer to install the skill from
-https://github.com/F-e-u-e-r/religion-council/tree/main/skills/religion-council
+https://github.com/F-e-u-e-r/worldwide-council/tree/main/skills/worldwide-council
 ```
 
 Restart Codex, then invoke:
@@ -306,8 +306,8 @@ A0 階段與 controller 都不需要第三方 Python 套件。模式 3 使用目
 - 模式 2、3 需要已透過 `codex login` 登入的 Codex CLI
 
 ```bash
-git clone https://github.com/F-e-u-e-r/religion-council.git
-cd religion-council
+git clone https://github.com/F-e-u-e-r/worldwide-council.git
+cd worldwide-council
 ```
 
 ## 模式 1 — Claude Code
@@ -330,7 +330,7 @@ Claude Code 會載入 `.claude/agents/` 與 `.claude/skills/worldwide-council/`�
 本 repo 同時是一個 Claude Code plugin,並附自己的 marketplace 檔;安裝一次後可在任何工作目錄召集議會:
 
 ```bash
-claude plugin marketplace add F-e-u-e-r/religion-council      # 只需一次
+claude plugin marketplace add F-e-u-e-r/worldwide-council      # 只需一次
 claude plugin install worldwide-council@worldwide-council
 cd ~/anywhere && claude --agent worldwide-council:council-moderator
 ```
@@ -353,7 +353,7 @@ agents、可攜 skill 與 hybrid controller(`plugin:worldwide-council:worldwide-
 
 ```text
 Use $skill-installer to install the skill from
-https://github.com/F-e-u-e-r/religion-council/tree/main/skills/religion-council
+https://github.com/F-e-u-e-r/worldwide-council/tree/main/skills/worldwide-council
 ```
 
 重開 Codex 後呼叫:

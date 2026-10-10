@@ -17,7 +17,7 @@ _Originally “Religion Council”; renamed “Worldview Council” as it broade
 
 **Who it's for.** Developers running Claude Code, Codex, or any MCP-capable agent, plus educators and inter-faith readers who want a sourced, multi-tradition debate rather than a single blended voice.
 
-**Install (Claude Code).** `claude plugin marketplace add F-e-u-e-r/religion-council` then `claude plugin install worldwide-council@worldwide-council`. Codex and other agents: see [INSTALL.md](INSTALL.md).
+**Install (Claude Code).** `claude plugin marketplace add F-e-u-e-r/worldwide-council` then `claude plugin install worldwide-council@worldwide-council`. Codex and other agents: see [INSTALL.md](INSTALL.md).
 
 **See a real run first.** A Claude-only council on *"does life have meaning?"* — [showcase transcript](docs/showcase/2026-09-28-claude-only-meaning-of-life.md). This is the instruction-enforced tier (quotations mechanically re-checked at curation time), **not** strict mode.
 
@@ -98,8 +98,8 @@ religious Taoism where it matters).
 **1. Claude Code only** (uses the 38 custom agents):
 
 ```bash
-git clone https://github.com/F-e-u-e-r/religion-council.git
-cd religion-council
+git clone https://github.com/F-e-u-e-r/worldwide-council.git
+cd worldwide-council
 claude            # open Claude Code in the repo root
 ```
 Then, in the conversation:
@@ -425,7 +425,7 @@ _原稱「Religion Council」，後更名為「Worldview Council」，現正式�
 
 **適合誰。** 使用 Claude Code、Codex 或任何支援 MCP 之 agent 的開發者,以及想要「有原典依據的多傳統辯論」而非單一混合口吻的教育者與跨宗教讀者。
 
-**安裝(Claude Code)。** `claude plugin marketplace add F-e-u-e-r/religion-council`,再執行 `claude plugin install worldwide-council@worldwide-council`。Codex 與其他 agent 見 [INSTALL.md](INSTALL.md)。
+**安裝(Claude Code)。** `claude plugin marketplace add F-e-u-e-r/worldwide-council`,再執行 `claude plugin install worldwide-council@worldwide-council`。Codex 與其他 agent 見 [INSTALL.md](INSTALL.md)。
 
 **先看一場真實議會。** 以「人生有沒有意義?」為題的純 Claude 議會——[逐字稿](docs/showcase/2026-09-28-claude-only-meaning-of-life.md)。此為 instruction-enforced 層(引文於 curation 時以機器複核),**非** strict 模式。
 
@@ -488,8 +488,8 @@ _原稱「Religion Council」，後更名為「Worldview Council」，現正式�
 **1. 純 Claude Code**:
 
 ```bash
-git clone https://github.com/F-e-u-e-r/religion-council.git
-cd religion-council
+git clone https://github.com/F-e-u-e-r/worldwide-council.git
+cd worldwide-council
 claude            # 在專案根目錄開啟 Claude Code
 ```
 然後在對話中:
