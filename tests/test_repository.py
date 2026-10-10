@@ -24,14 +24,14 @@ def _load_portable_retriever():
 
 
 class RepositoryValidationTest(unittest.TestCase):
-    def test_release_version_is_v0131(self):
-        self.assertEqual((ROOT / "VERSION").read_text(encoding="utf-8").strip(), "v0.13.1")
+    def test_release_version_is_beta(self):
+        self.assertEqual((ROOT / "VERSION").read_text(encoding="utf-8").strip(), "v0.1.0-beta.1")
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("version-v0.13.1", readme)
+        self.assertIn("version: v0.1.0-beta.1", readme)
         controller = (ROOT / "orchestrator" / "debate_controller.py").read_text(
             encoding="utf-8"
         )
-        self.assertIn('CONTROLLER_VERSION = "0.13.1"', controller)
+        self.assertIn('CONTROLLER_VERSION = "0.1.0-beta.1"', controller)
 
     def test_plugin_manifests_match_the_repository(self):
         # The repo doubles as a Claude Code plugin + self-hosted marketplace. Pin the parts that
