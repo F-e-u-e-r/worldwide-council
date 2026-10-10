@@ -10,6 +10,47 @@ framed around the project's two architecture axes (see
 The format is adapted from [Keep a Changelog](https://keepachangelog.com/); versions follow
 `vMAJOR.MINOR.PATCH`. (The first tag `v0.1` predates that convention and is kept as-is.)
 
+## [1.0.0-beta.1] - 2026-10-11
+
+**Public version line reset to `v1.0.0-beta.1`.** The project's public version is reset from
+`v0.1.0-beta.1` to **`v1.0.0-beta.1`**, opening the canonical Worldwide Council `1.0.0` public beta
+line after the successful T5a installed-copy requalification. This is a **prerelease** — **not** a
+stable / general-availability release. Earlier GitHub releases and tags from the pre-`1.0`
+development line are retired from the public release surface; **commit history, the historical
+changelog below, ADRs, frozen evidence and the versioned protocol identifiers remain intact** —
+nothing is erased, only the published GitHub release/tag set is reset. No runtime or product
+semantics change in this reset.
+
+### Release / publication
+- **Canonical identity established.** Canonical repository `F-e-u-e-r/worldwide-council`; plugin,
+  marketplace and skill id `worldwide-council`; MCP server `worldwide-council-controller`. Worldwide
+  Council is the canonical product identity.
+- **Public `VERSION` → `v1.0.0-beta.1`** (plugin and controller machine version `1.0.0-beta.1`). The
+  16 version-bound retrieval-v1 benchmark artifacts were regenerated so their `corpus_version`
+  metadata tracks the new `VERSION`; queries, judgments, thresholds, the retrieval algorithm and all
+  scores/rankings are unchanged — version-metadata-only regeneration plus allowed operational timing,
+  verified line-by-line by diff.
+- **Public versioning has been reset to `v1.0.0-beta.1`.** The previous GitHub releases and tags
+  from the pre-`1.0` line were retired from the public release surface after this reset merged.
+
+### Council composition (unchanged by this reset)
+- **37 voices / 38 total council agents** (1 neutral moderator + 37 voices). **Default council = 10**
+  (`worldwide-10.json`): the 8 evidence-backed traditions + secular humanism + Judaism.
+- **Evidence-backed traditions = 8** (source-grounded retrieval; `religion-8.json`): Christianity,
+  Islam, Hinduism, Buddhism, Taoism, Legalism, Confucianism, Mohism.
+- **Judaism** and **secular humanism** are **interpretive** voices — **not** retrieval-backed and
+  **not** strict-verified (no indexed corpus; outside strict verification coverage).
+
+### Assurance status
+- **T5a — installed-copy runtime requalification: COMPLETE** (2026-10-11; 38 agents; installed copy
+  launched from an unrelated working directory; evidence in
+  `docs/release/v0.14-installed-copy-acceptance.md`).
+- **T5b — clean-machine portability smoke: DEFERRED / PENDING** — release-blocking before any
+  stable / GA claim; must pass on a second, physically separate clean environment.
+- **T4b — strict-finalized validation: PENDING / not started.**
+- This beta establishes the `1.0.0` prerelease baseline only; **stable / GA is not claimed** and
+  remains gated on T5b (and T4b).
+
 ## [0.1.0-beta.1] - 2026-10-11
 
 **Public version line reset to a Worldwide Council beta.** The project's public version is reset to
